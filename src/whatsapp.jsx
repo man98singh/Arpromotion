@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 
 const CameraCapture = () => {
   const [image, setImage] = useState(null); // To store the captured image
+  const [whatsAppNumber, setWhatsAppNumber] = useState(''); // To store the WhatsApp number input
   const videoRef = useRef(null); // To control the video element
   const canvasRef = useRef(null); // To take a snapshot from the video
   
@@ -28,32 +29,17 @@ const CameraCapture = () => {
     setImage(imageData); // Set the captured image for preview
   };
 
-  // Share via Web Share API
-  const shareOnWhatsApp = async () => {
-    if (!image) {
-      alert('Please capture an image first.');
+  // Share via WhatsApp
+  const shareOnWhatsApp = () => {
+    if (!whatsAppNumber || !image) {
+      alert('Please capture an image and provide a valid WhatsApp number.');
       return;
     }
 
-    // Convert the data URL to a Blob for sharing
-    const response = await fetch(image);
-    const blob = await response.blob();
-    const file = new File([blob], 'image.png', { type: blob.type });
+    const encodedImage = encodeURIComponent(image); // Encode image to base64
+    const whatsappLink = `https://wa.me/${whatsAppNumber}?text=Check%20this%20out&image=${encodedImage}`;
 
-    // Check if Web Share API is supported
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      try {
-        await navigator.share({
-          title: 'Check this image',
-          text: 'Here is an image I captured!',
-          files: [file],
-        });
-      } catch (error) {
-        console.error('Error sharing:', error);
-      }
-    } else {
-      alert('Sharing is not supported on your device.');
-    }
+    window.open(whatsappLink, '_blank');
   };
 
   return (
@@ -76,8 +62,15 @@ const CameraCapture = () => {
         </div>
       )}
       
+      {/* WhatsApp number input */}
       <div>
-        <button onClick={shareOnWhatsApp}>Share to WhatsApp</button>
+        <input
+          type="text"
+          placeholder="Enter WhatsApp number with country code"
+          value={whatsAppNumber}
+          onChange={(e) => setWhatsAppNumber(e.target.value)}
+        />
+        <button onClick={shareOnWhatsApp}>Share on WhatsApp</button>
       </div>
     </div>
   );
