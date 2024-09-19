@@ -29,22 +29,20 @@ const CameraCapture = () => {
     setImage(imageData); // Set the captured image for preview
   };
 
-  // Share via WhatsApp
-  const shareOnWhatsApp = () => {
-    if (!whatsAppNumber || !image) {
-      alert('Please capture an image and provide a valid WhatsApp number.');
+  // Open WhatsApp with the entered number
+  const openWhatsApp = () => {
+    if (!whatsAppNumber) {
+      alert('Please provide a valid WhatsApp number.');
       return;
     }
 
-    const encodedImage = encodeURIComponent(image); // Encode image to base64
-    const whatsappLink = `https://wa.me/${whatsAppNumber}?text=Check%20this%20out&image=${encodedImage}`;
-
+    const whatsappLink = `https://wa.me/${whatsAppNumber}`;
     window.open(whatsappLink, '_blank');
   };
 
   return (
     <div>
-      <h1>Camera Capture & Share via WhatsApp</h1>
+      <h1>Camera Capture & Open WhatsApp</h1>
       
       <div>
         <video ref={videoRef} autoPlay style={{ width: '100%' }}></video>
@@ -70,7 +68,7 @@ const CameraCapture = () => {
           value={whatsAppNumber}
           onChange={(e) => setWhatsAppNumber(e.target.value)}
         />
-        <button onClick={shareOnWhatsApp}>Share on WhatsApp</button>
+        <button onClick={openWhatsApp}>Open WhatsApp</button>
       </div>
     </div>
   );
