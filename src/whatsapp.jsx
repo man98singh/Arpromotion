@@ -29,20 +29,20 @@ const CameraCapture = () => {
     setImage(imageData); // Set the captured image for preview
   };
 
-  // Open WhatsApp with the entered number
+  // Open WhatsApp Web with the entered number
   const openWhatsApp = () => {
     if (!whatsAppNumber) {
       alert('Please provide a valid WhatsApp number.');
       return;
     }
 
-    const whatsappLink = `https://wa.me/${whatsAppNumber}`;
+    const whatsappLink = `https://web.whatsapp.com/send?phone=${whatsAppNumber}`;
     window.open(whatsappLink, '_blank');
   };
 
   return (
     <div>
-      <h1>Camera Capture & Open WhatsApp</h1>
+      <h1>Camera Capture & Open WhatsApp Web</h1>
       
       <div>
         <video ref={videoRef} autoPlay style={{ width: '100%' }}></video>
@@ -68,7 +68,7 @@ const CameraCapture = () => {
           value={whatsAppNumber}
           onChange={(e) => setWhatsAppNumber(e.target.value)}
         />
-        <button onClick={openWhatsApp}>Open WhatsApp</button>
+        <button onClick={openWhatsApp}>Open WhatsApp Web</button>
       </div>
     </div>
   );
