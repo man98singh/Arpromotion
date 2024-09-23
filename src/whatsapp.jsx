@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 
 const CameraCapture = () => {
   const [image, setImage] = useState(null); // To store the captured image
-  const [whatsAppNumber, setWhatsAppNumber] = useState(''); // To store the WhatsApp number input
+  const [viberNumber, setViberNumber] = useState(''); // To store the Viber number input
   const videoRef = useRef(null); // To control the video element
   const canvasRef = useRef(null); // To take a snapshot from the video
   
@@ -29,20 +29,20 @@ const CameraCapture = () => {
     setImage(imageData); // Set the captured image for preview
   };
 
-  // Open WhatsApp Web with the entered number
-  const openWhatsApp = () => {
-    if (!whatsAppNumber) {
-      alert('Please provide a valid WhatsApp number.');
+  // Open Viber with the entered number
+  const openViber = () => {
+    if (!viberNumber) {
+      alert('Please provide a valid Viber number.');
       return;
     }
 
-    const whatsappLink = `https://web.whatsapp.com/send?phone=${whatsAppNumber}`;
-    window.open(whatsappLink, '_blank');
+    const viberLink = `viber://chat?number=${viberNumber}`;
+    window.open(viberLink, '_blank');
   };
 
   return (
     <div>
-      <h1>Camera Capture & Open WhatsApp Web</h1>
+      <h1>Camera Capture & Open Viber</h1>
       
       <div>
         <video ref={videoRef} autoPlay style={{ width: '100%' }}></video>
@@ -60,15 +60,15 @@ const CameraCapture = () => {
         </div>
       )}
       
-      {/* WhatsApp number input */}
+      {/* Viber number input */}
       <div>
         <input
           type="text"
-          placeholder="Enter WhatsApp number with country code"
-          value={whatsAppNumber}
-          onChange={(e) => setWhatsAppNumber(e.target.value)}
+          placeholder="Enter Viber number with country code"
+          value={viberNumber}
+          onChange={(e) => setViberNumber(e.target.value)}
         />
-        <button onClick={openWhatsApp}>Open WhatsApp Web</button>
+        <button onClick={openViber}>Open Viber</button>
       </div>
     </div>
   );
