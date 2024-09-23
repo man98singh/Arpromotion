@@ -29,20 +29,34 @@ const CameraCapture = () => {
     setImage(imageData); // Set the captured image for preview
   };
 
-  // Open Viber with the entered number
-  const openViber = () => {
+  // Open Viber and share the captured image (attempt using URL format)
+  const shareToViber = () => {
     if (!viberNumber) {
       alert('Please provide a valid Viber number.');
       return;
     }
 
+    if (!image) {
+      alert('Please capture an image first.');
+      return;
+    }
+
+    // This creates a download link for the image which might be sharable via Viber
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = 'captured_image.png';
+    document.body.appendChild(link);
+    
+    // Attempt to open Viber with a chat link, no native support for image sharing directly
     const viberLink = `viber://chat?number=${viberNumber}`;
     window.open(viberLink, '_blank');
+    
+    document.body.removeChild(link);
   };
 
   return (
     <div>
-      <h1>Camera Capture and Viber test</h1>
+      <h1>Camera Capture & Share to Viber</h1>
       
       <div>
         <video ref={videoRef} autoPlay style={{ width: '100%' }}></video>
@@ -64,11 +78,11 @@ const CameraCapture = () => {
       <div>
         <input
           type="text"
-          placeholder="Enter Viber number"
+          placeholder="Enter Viber number with country code"
           value={viberNumber}
           onChange={(e) => setViberNumber(e.target.value)}
         />
-        <button onClick={openViber}>Open Viber</button>
+        <button onClick={shareToViber}>Share to Viber</button>
       </div>
     </div>
   );
