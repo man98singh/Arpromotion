@@ -42,7 +42,7 @@ const CameraCapture = () => {
 
   return (
     <div>
-      <h1>Camera Capture & Open Viber</h1>
+      <h1>Camera Capture and Viber test</h1>
       
       <div>
         <video ref={videoRef} autoPlay style={{ width: '100%' }}></video>
@@ -64,7 +64,7 @@ const CameraCapture = () => {
       <div>
         <input
           type="text"
-          placeholder="Enter Viber number with country code"
+          placeholder="Enter Viber number"
           value={viberNumber}
           onChange={(e) => setViberNumber(e.target.value)}
         />
