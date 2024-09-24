@@ -76,7 +76,7 @@ const CameraCapture = () => {
       
       {/* Share button to trigger iOS Share Sheet */}
       <div>
-        <button onClick={shareToViber}>Share Image via iOS Share Sheet</button>
+        <button onClick={shareToViber}>Share Image</button>
       </div>
     </div>
   );
