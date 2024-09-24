@@ -29,29 +29,29 @@ const CameraCapture = () => {
     setImage(imageData); // Set the captured image for preview
   };
 
-  // Open Viber and share the captured image (attempt using URL format)
-  const shareToViber = () => {
-    if (!viberNumber) {
-      alert('Please provide a valid Viber number.');
-      return;
-    }
-
+  // Open iOS Share Sheet and share the captured image via Viber or other apps
+  const shareToViber = async () => {
     if (!image) {
       alert('Please capture an image first.');
       return;
     }
 
-    // This creates a download link for the image which might be sharable via Viber
-    const link = document.createElement('a');
-    link.href = image;
-    link.download = 'captured_image.png';
-    document.body.appendChild(link);
-    
-    // Attempt to open Viber with a chat link, no native support for image sharing directly
-    const viberLink = `viber://chat?number=${viberNumber}`;
-    window.open(viberLink, '_blank');
-    
-    document.body.removeChild(link);
+    const blob = await fetch(image).then(res => res.blob());
+    const file = new File([blob], 'captured_image.png', { type: 'image/png' });
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Share Image',
+          text: 'Sharing the captured image',
+          files: [file], // Attach the captured image
+        });
+      } catch (error) {
+        console.error('Error sharing image: ', error);
+      }
+    } else {
+      alert('Sharing is not supported in this browser.');
+    }
   };
 
   return (
@@ -74,15 +74,9 @@ const CameraCapture = () => {
         </div>
       )}
       
-      {/* Viber number input */}
+      {/* Share button to trigger iOS Share Sheet */}
       <div>
-        <input
-          type="text"
-          placeholder="Enter Viber number with country code"
-          value={viberNumber}
-          onChange={(e) => setViberNumber(e.target.value)}
-        />
-        <button onClick={shareToViber}>Share to Viber</button>
+        <button onClick={shareToViber}>Share Image via iOS Share Sheet</button>
       </div>
     </div>
   );
