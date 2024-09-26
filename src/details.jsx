@@ -11,7 +11,7 @@ const Details = () => {
         const userDetails = { name, email, number };
 
         try {
-            const response = await fetch('/api/collectdetails', {
+            const response = await fetch('/api/collect', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
