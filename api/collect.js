@@ -1,6 +1,6 @@
 // /api/collectdetails.js
-import { Client } from 'pg';
-
+import pg from 'pg';
+const {Client} = pg
 const client = new Client({
     connectionString: 'postgresql://test-db_owner:d5MLEA1QaWPk@ep-long-meadow-a5jyiih3.us-east-2.aws.neon.tech/test-db?sslmode=require',
 });
