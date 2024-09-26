@@ -20,7 +20,7 @@ const ConsentPopup = ({ onAgree }) => {
     return (
         isVisible && (
             <div style={styles.popup}>
-                <h2>Consent Agreement</h2>
+                <h2>Consent Agreement latest</h2>
                 <p>
                     By entering this application, you agree to abide by all conditions set forth. 
                     Please confirm your agreement by checking the box below.
