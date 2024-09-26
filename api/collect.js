@@ -10,7 +10,7 @@ client.connect();
 export default async (req, res) => {
     if (req.method === 'POST') {
         const { name, email, number } = req.body;
-
+//yoo
         try {
             const query = 'INSERT INTO users (name, email, number) VALUES ($1, $2, $3)'; // Make sure to use your actual table name
             const values = [name, email, number];
