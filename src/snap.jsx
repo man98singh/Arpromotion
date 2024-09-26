@@ -21,9 +21,9 @@ import { bootstrapCameraKit } from '@snap/camera-kit';
             
                         // Set video constraints to 1280x720 (16:9 aspect ratio)
                         const videoConstraints = {
-                            width: { ideal: 1280 },
-                            height: { ideal: 720 },
-                            aspectRatio: 16 / 9,
+                            width: { ideal: 720 },
+                            height: { ideal: 1280 },
+                            aspectRatio: 9 / 16,
                             facingMode: cameraFacingMode // Set the facing mode
                         };
             
