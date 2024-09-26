@@ -9,10 +9,15 @@ client.connect();
 
 export default async (req, res) => {
     if (req.method === 'POST') {
-        const { name, email, number } = req.body;
-//yoo
+        const { body } = req; // First get the body
+        if (!body) {
+            return res.status(400).json({ message: 'Request body is required' });
+        }
+        
+        const { name, email, number } = body;
+
         try {
-            const query = 'INSERT INTO users (name, email, number) VALUES ($1, $2, $3)'; // Make sure to use your actual table name
+            const query = 'INSERT INTO users (name, email, number) VALUES ($1, $2, $3)';
             const values = [name, email, number];
             await client.query(query, values);
 
@@ -22,7 +27,6 @@ export default async (req, res) => {
             res.status(500).json({ message: 'Internal Server Error' });
         }
     } else if (req.method === 'GET') {
-        // Respond with a simple message to verify the endpoint is reachable
         res.status(200).json({ message: 'GET request to /api/collectdetails successful!' });
     } else {
         res.setHeader('Allow', ['POST', 'GET']);
