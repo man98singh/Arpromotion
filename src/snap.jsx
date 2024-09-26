@@ -15,15 +15,15 @@ const CameraComponent = () => {
                 liveRenderTarget: liveRenderTargetRef.current
             });
 
-            // Set video constraints to 1280x720 (16:9 aspect ratio)
-            const videoConstraints = {
-                width: { ideal: 1280 },
-                height: { ideal: 720 },
-                aspectRatio: 16 / 9
-            };
+            // // Set video constraints to 1280x720 (16:9 aspect ratio)
+            // const videoConstraints = {
+            //     width: { ideal: 1280 },
+            //     height: { ideal: 720 },
+            //     aspectRatio: 16 / 9
+            // };
 
             const mediaStream = await navigator.mediaDevices.getUserMedia({
-                video: videoConstraints
+            
             });
 
             await session.setSource(mediaStream);
