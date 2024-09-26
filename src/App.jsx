@@ -1,20 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import CameraCapture from './whatsapp'
-import SnapCameraLens from './snap'
-import CameraComponent from './snap'
+import React, { useState } from 'react';
+import CameraComponent from './snap'; // Adjust the import based on your file structure
+import ConsentPopup from './popup';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [hasAgreed, setHasAgreed] = useState(false);
 
-  return (
-    <>
-    
-    <CameraComponent />
-    </>
-  )
-}
+    const handleAgreement = () => {
+        setHasAgreed(true);
+    };
 
+    return (
+        <div>
+            {!hasAgreed ? (
+                <ConsentPopup onAgree={handleAgreement} />
+            ) : (
+                <CameraComponent />
+            )}
+        </div>)}
+   
 export default App
