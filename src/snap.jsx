@@ -10,7 +10,7 @@ const CameraComponent = () => {
     useEffect(() => {
         const setupCamera = async () => {
             const cameraKit = await bootstrapCameraKit({
-                apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
+                apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF+U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
             });
 
             const session = await cameraKit.createSession({
@@ -38,12 +38,12 @@ const CameraComponent = () => {
                 'f029c812-af38-419f-a7dc-5c953e78ea98'
             );
 
-            // Apply the lens with fixed positioning
+            // Apply the lens
             await session.applyLens(lens);
 
-            // Set up fixed positioning for AR elements
-            session.setRenderFeature('fixedOffset', true);
-            session.setRenderFeature('fixedPosition', { x: 0, y: 0, z: -5 }); // Adjust these values as needed
+            // If the lens supports custom parameters for positioning, you can try setting them here
+            // This is an example and may need to be adjusted based on your specific lens
+            session.send('setFixedPosition', { x: 0, y: 0, z: -5 });
         };
 
         setupCamera();
