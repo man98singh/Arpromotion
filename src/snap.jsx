@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import PreviewComponent from './PreviewComponent';
 
-import 'dotenv/config'
 
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
@@ -15,7 +14,7 @@ const CameraComponent = () => {
         const cameraKit = await bootstrapCameraKit({
             apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
             
-        });
+        });//yoo
 
         const session = await cameraKit.createSession({
             liveRenderTarget: liveRenderTargetRef.current
