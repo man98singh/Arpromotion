@@ -20,7 +20,7 @@ client.connect((err) => {
     } else {
         console.log('Connected to PostgreSQL database successfully');
     }
-});
+});//here we go again
 
 export default async (req, res) => {
     if (req.method === 'POST') {
