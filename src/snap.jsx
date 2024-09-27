@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import PreviewComponent from './PreviewComponent';
 
-
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
     const [capturedImage, setCapturedImage] = useState(null);
@@ -11,10 +10,11 @@ const CameraComponent = () => {
 
     // Function to set up the camera session
     const setupCamera = async () => {
+
         const cameraKit = await bootstrapCameraKit({
             apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
             
-        });//yoo
+        });
 
         const session = await cameraKit.createSession({
             liveRenderTarget: liveRenderTargetRef.current
@@ -41,7 +41,6 @@ const CameraComponent = () => {
         await session.applyLens(lens);
     };
 
-    // Set up the camera when the component mounts or when cameraFacingMode changes
     useEffect(() => {
         setupCamera();
 
@@ -50,7 +49,7 @@ const CameraComponent = () => {
                 sessionRef.current.stop(); // Cleanup the session on unmount
             }
         };
-    }, [cameraFacingMode]); // Re-run setupCamera when cameraFacingMode changes
+    }, [cameraFacingMode]);
 
     const captureImage = async () => {
         const canvas = liveRenderTargetRef.current;
@@ -67,7 +66,7 @@ const CameraComponent = () => {
             <PreviewComponent
                 capturedImage={capturedImage}
                 onBack={() => {
-                    setCapturedImage(null); // Reset the captured image
+                    setCapturedImage(null);
                     setupCamera(); // Restart the camera session
                 }}
             />
@@ -75,22 +74,81 @@ const CameraComponent = () => {
     }
 
     return (
-        <div>
-            <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '1280px', height: '720px' }} />
-            <button className="capture-button" onClick={captureImage}>Capture</button>
-            <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
+        <div className="camera-container"> {/* Changed container class for styling */}
+            <canvas ref={liveRenderTargetRef} id="canvas" className="live-canvas" /> {/* Added class for styling */}
+            <div className="controls"> {/* Added a controls div for better layout */}
+                <button className="capture-button" onClick={captureImage}>Capture</button>
+                <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
+            </div>
+            <div className="details-section"> {/* Added details section for scrolling */}
+                <h3>Details Section</h3>
+                <p>Scroll down for more details...</p>
+                {/* Add your detailed content here */}
+                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            </div>
             <style>
                 {`
-                    .capture-button, .toggle-button {
-                        padding: 10px 20px;
-                        font-size: 16px;
-                        margin: 5px;
+                    .camera-container { /* Changed to flex layout for responsive design */
+                        display: flex;
+                        flex-direction: column;
+                        height: 100vh; /* Full height of the viewport */
+                        overflow: hidden;
+                        position: relative;
                     }
 
-                    @media (max-width: 600px) {
+                    .live-canvas { /* Added responsive styling for the canvas */
+                        flex: 1; /* Allow the canvas to expand */
+                        width: 100%; /* Full width */
+                        height: auto; /* Maintain aspect ratio */
+                        position: absolute; /* Positioning to fill the container */
+                        top: 0;
+                        left: 0;
+                    }
+
+                    .controls { /* Added a div for control buttons */
+                        display: flex;
+                        justify-content: space-between; /* Space buttons apart */
+                        position: absolute;
+                        bottom: 20px; /* Position at the bottom */
+                        left: 0;
+                        right: 0;
+                        padding: 0 20px; /* Padding for buttons */
+                    }
+
+                    .capture-button, .toggle-button { /* Updated button styles */
+                        padding: 12px 20px;
+                        font-size: 18px;
+                        background-color: #ff4757; /* Button color */
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .capture-button:hover, .toggle-button:hover { /* Hover effects */
+                        background-color: #ff6b81;
+                    }
+
+                    .details-section { /* Styles for the details section */
+                        padding: 20px;
+                        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+                        max-height: 300px; /* Set a max height */
+                        overflow-y: auto; /* Enable scrolling */
+                        border-radius: 10px; /* Rounded corners */
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+                        position: relative;
+                        z-index: 10; /* Ensure it appears above the canvas */
+                    }
+
+                    @media (max-width: 600px) { /* Responsive styles for smaller screens */
                         .capture-button, .toggle-button {
-                            font-size: 14px;
-                            padding: 8px 16px;
+                            font-size: 16px;
+                            padding: 10px 15px;
                         }
                     }
                 `}
