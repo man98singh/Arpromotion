@@ -1,19 +1,34 @@
-// /api/collectdetails.js
 import pg from 'pg';
-const apistring= process.env.DATABASE_URL;
-const {Client} = pg
-const client = new Client({
-    connectionString: apistring});
 
-client.connect();
+const apistring = process.env.DATABASE_URL;
+
+if (!apistring) {
+    console.error("DATABASE_URL environment variable not set.");
+    process.exit(1); // Exit if database connection string is not available
+}
+
+const { Client } = pg;
+const client = new Client({
+    connectionString: apistring,
+});
+
+// Attempt to connect and handle connection errors
+client.connect((err) => {
+    if (err) {
+        console.error('Database connection error:', err);
+        process.exit(1); // Exit the process on connection failure
+    } else {
+        console.log('Connected to PostgreSQL database successfully');
+    }
+});
 
 export default async (req, res) => {
     if (req.method === 'POST') {
-        const { body } = req; // First get the body
+        const { body } = req;
         if (!body) {
             return res.status(400).json({ message: 'Request body is required' });
         }
-        
+
         const { name, email, number } = body;
 
         try {
