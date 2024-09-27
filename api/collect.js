@@ -1,9 +1,9 @@
 // /api/collectdetails.js
 import pg from 'pg';
+const apistring= process.env.VITE_API_KEY;
 const {Client} = pg
 const client = new Client({
-    connectionString: 'postgresql://test-db_owner:d5MLEA1QaWPk@ep-long-meadow-a5jyiih3.us-east-2.aws.neon.tech/test-db?sslmode=require',
-});
+    connectionString: apistring});
 
 client.connect();
 
