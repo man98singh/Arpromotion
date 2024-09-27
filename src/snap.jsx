@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
+import PreviewComponent from './PreviewComponent'; // Importing the PreviewComponent
 
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
@@ -11,7 +12,6 @@ const CameraComponent = () => {
         const setupCamera = async () => {
             const cameraKit = await bootstrapCameraKit({
                 apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-            
             });
 
             const session = await cameraKit.createSession({
@@ -67,15 +67,26 @@ const CameraComponent = () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
     };
 
+    const handleBackToCamera = () => {
+        setCapturedImage(null); // Clear the captured image to go back to the camera
+    };
+
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
-            <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
-            
-            {/* Adjusted button container for better visibility */}
-            <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
-                <button className="capture-button" onClick={captureImage}>Capture</button>
-                <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
-            </div>
+            {capturedImage ? (
+                // Render the PreviewComponent if an image is captured
+                <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
+            ) : (
+                <>
+                    <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
+                    
+                    {/* Adjusted button container for better visibility */}
+                    <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
+                        <button className="capture-button" onClick={captureImage}>Capture</button>
+                        <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
+                    </div>
+                </>
+            )}
 
             <style>
                 {`
