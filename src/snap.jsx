@@ -8,46 +8,47 @@ const CameraComponent = () => {
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
 
-    useEffect(() => {
-        const setupCamera = async () => {
-            const cameraKit = await bootstrapCameraKit({
-                apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-            
-            });
+    // Function to set up the camera session
+    const setupCamera = async () => {
+        const cameraKit = await bootstrapCameraKit({
+            apiToken: 'your-api-token-here'
+        });
 
-            const session = await cameraKit.createSession({
-                liveRenderTarget: liveRenderTargetRef.current
-            });
-            sessionRef.current = session;
+        const session = await cameraKit.createSession({
+            liveRenderTarget: liveRenderTargetRef.current
+        });
+        sessionRef.current = session;
 
-            const videoConstraints = {
-                width: { ideal: 1920 },
-                height: { ideal: 1080 },
-                facingMode: cameraFacingMode
-            };
-
-            const mediaStream = await navigator.mediaDevices.getUserMedia({
-                video: videoConstraints
-            });
-
-            await session.setSource(mediaStream);
-            await session.play();
-
-            const lens = await cameraKit.lensRepository.loadLens(
-                '48b170de-f6f8-4e6a-a57b-be18b322d148',
-                'f029c812-af38-419f-a7dc-5c953e78ea98'
-            );
-            await session.applyLens(lens);
+        const videoConstraints = {
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+            facingMode: cameraFacingMode
         };
 
+        const mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: videoConstraints
+        });
+
+        await session.setSource(mediaStream);
+        await session.play();
+
+        const lens = await cameraKit.lensRepository.loadLens(
+            '48b170de-f6f8-4e6a-a57b-be18b322d148',
+            'f029c812-af38-419f-a7dc-5c953e78ea98'
+        );
+        await session.applyLens(lens);
+    };
+
+    // Set up the camera when the component mounts or when cameraFacingMode changes
+    useEffect(() => {
         setupCamera();
 
         return () => {
             if (sessionRef.current) {
-                sessionRef.current.stop();
+                sessionRef.current.stop(); // Cleanup the session on unmount
             }
         };
-    }, [cameraFacingMode]);
+    }, [cameraFacingMode]); // Re-run setupCamera when cameraFacingMode changes
 
     const captureImage = async () => {
         const canvas = liveRenderTargetRef.current;
@@ -63,7 +64,10 @@ const CameraComponent = () => {
         return (
             <PreviewComponent
                 capturedImage={capturedImage}
-                onBack={() => setCapturedImage(null)}
+                onBack={() => {
+                    setCapturedImage(null); // Reset the captured image
+                    setupCamera(); // Restart the camera session
+                }}
             />
         );
     }
