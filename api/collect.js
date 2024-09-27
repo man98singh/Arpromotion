@@ -1,5 +1,6 @@
 import pg from 'pg';
 
+// Use the environment variable for the database connection string
 const apistring = process.env.DATABASE_URL;
 
 if (!apistring) {
@@ -10,6 +11,9 @@ if (!apistring) {
 const { Client } = pg;
 const client = new Client({
     connectionString: apistring,
+    ssl: {
+        rejectUnauthorized: false, // Adjust based on your security requirements
+    },
 });
 
 // Attempt to connect and handle connection errors
@@ -20,20 +24,22 @@ client.connect((err) => {
     } else {
         console.log('Connected to PostgreSQL database successfully');
     }
-});//here we go again
+});
 
+// Main API function to handle requests
 export default async (req, res) => {
     if (req.method === 'POST') {
         const { body } = req;
+
         if (!body) {
             return res.status(400).json({ message: 'Request body is required' });
         }
 
-        const { name, email, number } = body;
+        const { name, email, number } = body; // Ensure `number` is used
 
         try {
             const query = 'INSERT INTO users (name, email, pnum) VALUES ($1, $2, $3)';
-            const values = [name, email, pnum];
+            const values = [name, email, number]; // Use `number` here
             await client.query(query, values);
 
             res.status(200).json({ message: 'Details submitted successfully!' });
