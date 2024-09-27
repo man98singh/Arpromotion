@@ -33,7 +33,7 @@ export default async (req, res) => {
 
         try {
             const query = 'INSERT INTO users (name, email, pnum) VALUES ($1, $2, $3)';
-            const values = [name, email, number];
+            const values = [name, email, pnum];
             await client.query(query, values);
 
             res.status(200).json({ message: 'Details submitted successfully!' });
