@@ -1,6 +1,6 @@
 // /api/collectdetails.js
 import pg from 'pg';
-const apistring= process.env.VITE_API_KEY;
+const apistring= process.env.DATABASE_URL;
 const {Client} = pg
 const client = new Client({
     connectionString: apistring});
