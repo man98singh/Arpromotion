@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import PreviewComponent from './PreviewComponent'; // Importing the PreviewComponent
-import Details from './details'; // Importing the Details component
+import Details from './details';// Importing the Details component
 
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
@@ -10,44 +10,46 @@ const CameraComponent = () => {
     const [showDetails, setShowDetails] = useState(false); // State to control details visibility
     const sessionRef = useRef(null); // Ref to store the camera session
 
-    useEffect(() => {
-        const setupCamera = async () => {
-            const cameraKit = await bootstrapCameraKit({
-                apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-            });
+    // Function to setup the camera session
+    const setupCamera = async () => {
+        const cameraKit = await bootstrapCameraKit({
+            apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
+             // Ensure you replace this with your actual API token
+        });
 
-            const session = await cameraKit.createSession({
-                liveRenderTarget: liveRenderTargetRef.current
-            });
-            sessionRef.current = session; // Store session for cleanup
+        const session = await cameraKit.createSession({
+            liveRenderTarget: liveRenderTargetRef.current
+        });
+        sessionRef.current = session; // Store session for cleanup
 
-            // Set video constraints
-            const videoConstraints = {
-                width: { ideal: 1920 },
-                height: { ideal: 1080 },
-                facingMode: cameraFacingMode
-            };
-
-            const mediaStream = await navigator.mediaDevices.getUserMedia({
-                video: videoConstraints
-            });
-
-            await session.setSource(mediaStream);
-            await session.play();
-
-            const lens = await cameraKit.lensRepository.loadLens(
-                '48b170de-f6f8-4e6a-a57b-be18b322d148',
-                'f029c812-af38-419f-a7dc-5c953e78ea98'
-            );
-
-            await session.applyLens(lens);
+        // Set video constraints
+        const videoConstraints = {
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+            facingMode: cameraFacingMode
         };
 
+        const mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: videoConstraints
+        });
+
+        await session.setSource(mediaStream);
+        await session.play();
+
+        const lens = await cameraKit.lensRepository.loadLens(
+            '48b170de-f6f8-4e6a-a57b-be18b322d148',
+            'f029c812-af38-419f-a7dc-5c953e78ea98'
+        );
+
+        await session.applyLens(lens);
+    };
+
+    useEffect(() => {
         setupCamera();
 
         return () => {
             if (sessionRef.current) {
-                sessionRef.current.stop(); // Cleanup the session
+                sessionRef.current.stop(); // Cleanup the session on unmount
             }
         };
     }, [cameraFacingMode]);
@@ -73,6 +75,7 @@ const CameraComponent = () => {
     const handleBackToCamera = () => {
         setCapturedImage(null); // Clear the captured image to go back to the camera
         setShowDetails(false); // Hide the Details component when going back
+        setupCamera(); // Restart the camera session
     };
 
     return (
