@@ -32,7 +32,7 @@ export default async (req, res) => {
         const { name, email, number } = body;
 
         try {
-            const query = 'INSERT INTO users (name, email, number) VALUES ($1, $2, $3)';
+            const query = 'INSERT INTO users (name, email, pnum) VALUES ($1, $2, $3)';
             const values = [name, email, number];
             await client.query(query, values);
 
