@@ -9,39 +9,39 @@ const CameraComponent = () => {
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
 
-    useEffect(() => {
-        const setupCamera = async () => {
-            const cameraKit = await bootstrapCameraKit({
-                apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-            
-            });
+    // Function to set up the camera
+    const setupCamera = async () => {
+        const cameraKit = await bootstrapCameraKit({
+            apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
+        });
 
-            const session = await cameraKit.createSession({
-                liveRenderTarget: liveRenderTargetRef.current
-            });
-            sessionRef.current = session;
+        const session = await cameraKit.createSession({
+            liveRenderTarget: liveRenderTargetRef.current
+        });
+        sessionRef.current = session;
 
-            const videoConstraints = {
-                width: { ideal: 1920 },
-                height: { ideal: 1080 },
-                facingMode: cameraFacingMode
-            };
-
-            const mediaStream = await navigator.mediaDevices.getUserMedia({
-                video: videoConstraints
-            });
-
-            await session.setSource(mediaStream);
-            await session.play();
-
-            const lens = await cameraKit.lensRepository.loadLens(
-                '48b170de-f6f8-4e6a-a57b-be18b322d148',
-                'f029c812-af38-419f-a7dc-5c953e78ea98'
-            );
-
-            await session.applyLens(lens);
+        const videoConstraints = {
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+            facingMode: cameraFacingMode
         };
 
+        const mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: videoConstraints
+        });
+
+        await session.setSource(mediaStream);
+        await session.play();
+
+        const lens = await cameraKit.lensRepository.loadLens(
+            '48b170de-f6f8-4e6a-a57b-be18b322d148',
+            'f029c812-af38-419f-a7dc-5c953e78ea98'
+        );
+
+        await session.applyLens(lens);
+    };
+
+    useEffect(() => {
         setupCamera();
 
         return () => {
@@ -60,17 +60,16 @@ const CameraComponent = () => {
         }
 
         const imageUrl = canvas.toDataURL('image/png');
-        setCapturedImage(imageUrl);
+        setCapturedImage(imageUrl); // Store captured image URL
     };
 
     const toggleCamera = () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
     };
 
-    // Updated handleBack function to reset the captured image and restart the camera
-    const handleBack = () => {
+    const handleBack = async () => {
         setCapturedImage(null); // Reset captured image
-        setupCamera(); // Restart the camera feed
+        await setupCamera(); // Restart the camera feed
     };
 
     return (
