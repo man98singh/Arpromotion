@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import PreviewComponent from './PreviewComponent'; // Importing the PreviewComponent
+import Details from './details'; // Importing the Details component
 
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
     const [capturedImage, setCapturedImage] = useState(null);
     const [cameraFacingMode, setCameraFacingMode] = useState('environment'); // Default to rear camera
+    const [showDetails, setShowDetails] = useState(false); // State to control details visibility
     const sessionRef = useRef(null); // Ref to store the camera session
 
     useEffect(() => {
@@ -61,6 +63,7 @@ const CameraComponent = () => {
 
         const imageUrl = canvas.toDataURL('image/png'); // Capture image from the canvas
         setCapturedImage(imageUrl); // Update the captured image state
+        setShowDetails(true); // Show the Details component after capturing the image
     };
 
     const toggleCamera = () => {
@@ -69,13 +72,17 @@ const CameraComponent = () => {
 
     const handleBackToCamera = () => {
         setCapturedImage(null); // Clear the captured image to go back to the camera
+        setShowDetails(false); // Hide the Details component when going back
     };
 
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
                 // Render the PreviewComponent if an image is captured
-                <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
+                <>
+                    <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
+                    {showDetails && <Details />} {/* Show Details component on top of PreviewComponent */}
+                </>
             ) : (
                 <>
                     <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
