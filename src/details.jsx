@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Details = () => {
+const Details = ({ capturedImage }) => { // Accepting capturedImage as a prop
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
@@ -25,11 +25,25 @@ const Details = () => {
 
             const data = await response.json();
             console.log('Success:', data);
+
             // Reset input fields after successful submission
             setName('');
             setEmail('');
             setNumber('');
-            //yoo
+
+            // Sharing functionality
+            if (navigator.share) {
+                const imageUrl = capturedImage; // Get the captured image URL
+
+                // Sharing the image
+                await navigator.share({
+                    title: 'Shared Image and Details',
+                    text: `Name: ${userDetails.name}, Email: ${userDetails.email}, Number: ${userDetails.number}`,
+                    url: imageUrl, // This works only if the image is accessible via a URL
+                });
+            } else {
+                alert('Sharing not supported on this browser.');
+            }
         } catch (error) {
             console.error('Error:', error);
         }
