@@ -84,12 +84,7 @@ const CameraComponent = () => {
                 <h3>Details Section</h3>
                 <p>Scroll down for more details...</p>
                 {/* Add your detailed content here */}
-                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <p>More content can be added here to make it scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                
             </div>
             <style>
                 {`
