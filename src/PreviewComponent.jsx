@@ -3,16 +3,16 @@ import React from 'react';
 const PreviewComponent = ({ capturedImage, onBack }) => {
     return (
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 2, backgroundColor: 'rgba(0, 0, 0, 0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <h3 style={{ color: 'white' }}>Captured Image:</h3>
+            <h3 style={{ color: 'white', marginBottom: '10px' }}>Captured Image:</h3>
             <img src={capturedImage} alt="Captured" style={{ width: '100%', maxWidth: '600px', marginBottom: '20px' }} />
             <button className="back-button" onClick={onBack}>Back to Camera</button>
             <style>
                 {`
                     .back-button {
-                        padding: 12px 24px; /* Adjust padding for better visibility */
-                        font-size: 16px; /* Font size */
+                        padding: 12px 24px;
+                        font-size: 16px;
                         margin-top: 20px;
-                        background-color: rgba(255, 255, 255, 0.9); /* Light background for better contrast */
+                        background-color: rgba(255, 255, 255, 0.9);
                         border: none; 
                         border-radius: 5px;
                         cursor: pointer;
@@ -21,7 +21,7 @@ const PreviewComponent = ({ capturedImage, onBack }) => {
                     }
 
                     .back-button:hover {
-                        background-color: rgba(255, 255, 255, 1); /* Darker on hover */
+                        background-color: rgba(255, 255, 255, 1);
                     }
 
                     @media (max-width: 600px) {
