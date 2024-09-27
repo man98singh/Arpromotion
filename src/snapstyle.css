@@ -1,0 +1,43 @@
+/* snapstyle.css */
+.capture-button, .toggle-button {
+    padding: 15px 30px; /* Increased padding for better visibility */
+    font-size: 18px; /* Increased font size */
+    background-color: rgba(255, 255, 255, 0.8); /* Light background for better contrast */
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.capture-button:hover, .toggle-button:hover {
+    background-color: rgba(255, 255, 255, 1); /* Slightly darker on hover */
+}
+
+.back-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .capture-button, .toggle-button {
+        font-size: 16px;
+        padding: 12px 24px; /* Adjusted padding for mobile */
+    }
+
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+/* Additional styles for the camera and buttons */
+.button-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1;
+}

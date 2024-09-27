@@ -1,25 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
-import PreviewComponent from './PreviewComponent'; // Importing the PreviewComponent
+import './snapstyle.css';
+import PreviewComponent from './PreviewComponent';
 
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
     const [capturedImage, setCapturedImage] = useState(null);
-    const [cameraFacingMode, setCameraFacingMode] = useState('environment'); // Default to rear camera
-    const sessionRef = useRef(null); // Ref to store the camera session
+    const [cameraFacingMode, setCameraFacingMode] = useState('environment');
+    const sessionRef = useRef(null);
 
     useEffect(() => {
         const setupCamera = async () => {
             const cameraKit = await bootstrapCameraKit({
                 apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
+            
             });
 
             const session = await cameraKit.createSession({
                 liveRenderTarget: liveRenderTargetRef.current
             });
-            sessionRef.current = session; // Store session for cleanup
+            sessionRef.current = session;
 
-            // Set video constraints
             const videoConstraints = {
                 width: { ideal: 1920 },
                 height: { ideal: 1080 },
@@ -45,7 +46,7 @@ const CameraComponent = () => {
 
         return () => {
             if (sessionRef.current) {
-                sessionRef.current.stop(); // Cleanup the session
+                sessionRef.current.stop();
             }
         };
     }, [cameraFacingMode]);
@@ -53,65 +54,38 @@ const CameraComponent = () => {
     const captureImage = async () => {
         const canvas = liveRenderTargetRef.current;
 
-        // Ensure AudioContext is resumed after user gesture
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         if (audioContext.state === 'suspended') {
             await audioContext.resume();
         }
 
-        const imageUrl = canvas.toDataURL('image/png'); // Capture image from the canvas
-        setCapturedImage(imageUrl); // Update the captured image state
+        const imageUrl = canvas.toDataURL('image/png');
+        setCapturedImage(imageUrl);
     };
 
     const toggleCamera = () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
     };
 
-    const handleBackToCamera = () => {
-        setCapturedImage(null); // Clear the captured image to go back to the camera
+    // Updated handleBack function to reset the captured image and restart the camera
+    const handleBack = () => {
+        setCapturedImage(null); // Reset captured image
+        setupCamera(); // Restart the camera feed
     };
 
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+            <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
+            
+            {/* Show PreviewComponent if image is captured */}
             {capturedImage ? (
-                // Render the PreviewComponent if an image is captured
-                <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
+                <PreviewComponent capturedImage={capturedImage} onBack={handleBack} />
             ) : (
-                <>
-                    <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
-                    
-                    {/* Adjusted button container for better visibility */}
-                    <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
-                        <button className="capture-button" onClick={captureImage}>Capture</button>
-                        <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
-                    </div>
-                </>
+                <div className="button-container">
+                    <button className="capture-button" onClick={captureImage}>Capture</button>
+                    <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
+                </div>
             )}
-
-            <style>
-                {`
-                    .capture-button, .toggle-button {
-                        padding: 15px 30px; /* Increased padding for better visibility */
-                        font-size: 18px; /* Increased font size */
-                        background-color: rgba(255, 255, 255, 0.8); /* Light background for better contrast */
-                        border: none; 
-                        border-radius: 5px;
-                        cursor: pointer;
-                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-                    }
-
-                    .capture-button:hover, .toggle-button:hover {
-                        background-color: rgba(255, 255, 255, 1); /* Slightly darker on hover */
-                    }
-
-                    @media (max-width: 600px) {
-                        .capture-button, .toggle-button {
-                            font-size: 16px;
-                            padding: 12px 24px; /* Adjusted padding for mobile */
-                        }
-                    }
-                `}
-            </style>
         </div>
     );
 };
