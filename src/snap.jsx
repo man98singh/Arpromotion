@@ -84,7 +84,7 @@ const CameraComponent = () => {
                 // Render the PreviewComponent if an image is captured
                 <>
                     <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
-                    {showDetails && <Details />} {/* Show Details component on top of PreviewComponent */}
+                    {showDetails } {/* Show Details component on top of PreviewComponent */}
                 </>
             ) : (
                 <>

@@ -15,7 +15,7 @@ const App = () => {
             {!hasAgreed ? (
                 <ConsentPopup onAgree={handleAgreement} />
             ) : (<><CameraComponent/>
-            
+                <Details/>
             </>
             )}
         </div>)}
