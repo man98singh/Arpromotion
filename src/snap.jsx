@@ -105,7 +105,7 @@ const CameraComponent = () => {
     };
 
     return (
-        <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        <div style={{  height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
                 // Render the PreviewComponent if an image is captured
                 <>
@@ -121,7 +121,7 @@ const CameraComponent = () => {
                     <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
                     
                     {/* Adjusted button container for better visibility */}
-                    <div style={{ bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
+                    <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
                         <button className="capture-button" onClick={captureImage}>Capture</button>
                         <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
                     </div>
