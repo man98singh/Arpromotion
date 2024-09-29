@@ -15,7 +15,7 @@ const CameraComponent = () => {
     const setupCamera = async () => {
         const cameraKit = await bootstrapCameraKit({
             apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-             // Ensure you replace this with your actual API token
+            // Ensure you replace this with your actual API token
         });
 
         const session = await cameraKit.createSession({
@@ -36,15 +36,17 @@ const CameraComponent = () => {
 
         await session.setSource(mediaStream);
         await session.play();
-        try {   const lens = await cameraKit.lensRepository.loadLens(
-            '48b170de-f6f8-4e6a-a57b-be18b322d148',
-            'f029c812-af38-419f-a7dc-5c953e78ea98'
-        );
 
-        await session.applyLens(lens);} catch(error){
-            console.error("failed to app;y lens",error);
+        // Try applying the lens
+        try {
+            const lens = await cameraKit.lensRepository.loadLens(
+                '48b170de-f6f8-4e6a-a57b-be18b322d148',
+                'f029c812-af38-419f-a7dc-5c953e78ea98'
+            );
+            await session.applyLens(lens);
+        } catch (error) {
+            console.error("Failed to apply lens:", error);
         }
-     
     };
 
     useEffect(() => {
@@ -115,7 +117,7 @@ const CameraComponent = () => {
                     <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 4 }}>
                         <button className="share-button" onClick={shareImage}>Share Image</button>
                     </div>
-                    {showDetails} {/* Show Details component on top of PreviewComponent */}
+                    {showDetails && <Details />} {/* Show Details component on top of PreviewComponent */}
                 </>
             ) : (
                 <>
