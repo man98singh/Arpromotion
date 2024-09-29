@@ -15,12 +15,8 @@ const CameraComponent = () => {
     const setupCamera = async () => {
         const cameraKit = await bootstrapCameraKit({
             apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
+             // Ensure you replace this with your actual API token
         });
-
-        // Cleanup previous session if it exists
-        if (sessionRef.current) {
-            await sessionRef.current.stop();
-        }
 
         const session = await cameraKit.createSession({
             liveRenderTarget: liveRenderTargetRef.current
@@ -86,10 +82,12 @@ const CameraComponent = () => {
     // New function to share captured images
     const shareImage = async () => {
         if (capturedImage) {
+            // Create a temporary link to the image
             const blob = await fetch(capturedImage).then(res => res.blob());
             const file = new File([blob], 'captured-image.png', { type: 'image/png' });
 
             if (navigator.share) {
+                // Use the Web Share API for sharing
                 try {
                     await navigator.share({
                         title: 'Check out this image!',
@@ -109,6 +107,7 @@ const CameraComponent = () => {
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
+                // Render the PreviewComponent if an image is captured
                 <>
                     <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
                     <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 4 }}>
@@ -120,6 +119,7 @@ const CameraComponent = () => {
                 <>
                     <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
                     
+                    {/* Adjusted button container for better visibility */}
                     <div style={{ position: 'absolute', bottom: '80px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
                         <button className="capture-button" onClick={captureImage}>Capture</button>
                         <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
