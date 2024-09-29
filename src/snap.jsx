@@ -110,7 +110,7 @@ const CameraComponent = () => {
                 // Render the PreviewComponent if an image is captured
                 <>
                     <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
-                    <div style={{ position: 'relative', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 4 }}>
+                    <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 4 }}>
                         <button className="share-button" onClick={shareImage}>Share Image</button>
                     </div>
                     {showDetails} {/* Show Details component on top of PreviewComponent */}
