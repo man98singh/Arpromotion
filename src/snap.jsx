@@ -105,13 +105,12 @@ const CameraComponent = () => {
     };
 
     return (
-        <div style={{ position: 'relative', height: '100vh'}}>
+        <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
                 // Render the PreviewComponent if an image is captured
                 <>
                     <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
-                    <div>
-                        {/* New button for sharing the image */}
+                    <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
                         <button className="share-button" onClick={shareImage}>Share Image</button>
                     </div>
                     {showDetails} {/* Show Details component on top of PreviewComponent */}
@@ -121,7 +120,7 @@ const CameraComponent = () => {
                     <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
                     
                     {/* Adjusted button container for better visibility */}
-                    <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
+                    <div style={{ position: 'absolute', bottom: '80px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 1 }}>
                         <button className="capture-button" onClick={captureImage}>Capture</button>
                         <button className="toggle-button" onClick={toggleCamera}>Toggle Camera</button>
                     </div>
