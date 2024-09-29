@@ -80,45 +80,29 @@ const CameraComponent = () => {
     };
 
     // New function to share captured images
-    // const shareImage = async () => {
-    //     if (capturedImage) {
-    //         // Create a temporary link to the image
-    //         const blob = await fetch(capturedImage).then(res => res.blob());
-    //         const file = new File([blob], 'captured-image.png', { type: 'image/png' });
-
-    //         if (navigator.share) {
-    //             // Use the Web Share API for sharing
-    //             try {
-    //                 await navigator.share({
-    //                     title: 'Check out this image!',
-    //                     text: 'Here is the image I captured.',
-    //                     files: [file],
-    //                 });
-    //                 console.log('Image shared successfully');
-    //             } catch (error) {
-    //                 console.error('Error sharing the image:', error);
-    //             }
-    //         } else {
-    //             alert('Sharing is not supported on this browser.');
-    //         }
-    //     }
-    // };
-    const shareImage = () => {
+    const shareImage = async () => {
         if (capturedImage) {
-            // Encode the image URL for the mailto link
-            const subject = encodeURIComponent('Check out this image!');
-            const body = encodeURIComponent(`Here is the image I captured: ${capturedImage}\n\nPlease find the attached image.`);
-            
-            // Construct the mailto link
-            const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
-            
-            // Open the default email client
-            window.location.href = mailtoLink;
-        } else {
-            alert('No image captured to share.');
+            // Create a temporary link to the image
+            const blob = await fetch(capturedImage).then(res => res.blob());
+            const file = new File([blob], 'captured-image.png', { type: 'image/png' });
+
+            if (navigator.share) {
+                // Use the Web Share API for sharing
+                try {
+                    await navigator.share({
+                        title: 'Check out this image!',
+                        text: 'Here is the image I captured.',
+                        files: [file],
+                    });
+                    console.log('Image shared successfully');
+                } catch (error) {
+                    console.error('Error sharing the image:', error);
+                }
+            } else {
+                alert('Sharing is not supported on this browser.');
+            }
         }
     };
-    
 
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
