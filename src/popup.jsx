@@ -51,6 +51,7 @@ const styles = {
         transform: 'translate(-50%, -50%)',
         padding: '20px',
         backgroundColor: '#fff',
+        color:'black',
         border: '1px solid #ccc',
         borderRadius: '8px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
