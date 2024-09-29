@@ -1,6 +1,17 @@
 import React, { useState, useRef } from 'react';
 
+import { boostrapCameraKit } from "@snap/camera-kit";
+
 const CameraCapture = () => {
+  (async function main() {
+    const apiToken = "Your API Token value copied from the Camera Kit Portal";
+    const cameraKit = await bootstrapCameraKit({ apiToken });
+  
+    const canvas = document.getElementById("my-canvas");
+  const session = await cameraKit.createSession(canvas);
+  
+  
+  })();
   const [image, setImage] = useState(null); // To store the captured image
   const [viberNumber, setViberNumber] = useState(''); // To store the Viber number input
   const videoRef = useRef(null); // To control the video element

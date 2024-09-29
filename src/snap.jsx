@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import PreviewComponent from './PreviewComponent'; // Importing the PreviewComponent
-import Details from './details';// Importing the Details component
+import Details from './details'; // Importing the Details component
+import './snapstyle.css';
 
 const CameraComponent = () => {
     const liveRenderTargetRef = useRef(null);
@@ -78,13 +79,42 @@ const CameraComponent = () => {
         setupCamera(); // Restart the camera session
     };
 
+    // New function to share captured images
+    const shareImage = async () => {
+        if (capturedImage) {
+            // Create a temporary link to the image
+            const blob = await fetch(capturedImage).then(res => res.blob());
+            const file = new File([blob], 'captured-image.png', { type: 'image/png' });
+
+            if (navigator.share) {
+                // Use the Web Share API for sharing
+                try {
+                    await navigator.share({
+                        title: 'Check out this image!',
+                        text: 'Here is the image I captured.',
+                        files: [file],
+                    });
+                    console.log('Image shared successfully');
+                } catch (error) {
+                    console.error('Error sharing the image:', error);
+                }
+            } else {
+                alert('Sharing is not supported on this browser.');
+            }
+        }
+    };
+
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
                 // Render the PreviewComponent if an image is captured
                 <>
                     <PreviewComponent capturedImage={capturedImage} onBack={handleBackToCamera} />
-                    {showDetails } {/* Show Details component on top of PreviewComponent */}
+                    <div>
+                        {/* New button for sharing the image */}
+                        <button className="share-button" onClick={shareImage}>Share Image</button>
+                    </div>
+                    {showDetails} {/* Show Details component on top of PreviewComponent */}
                 </>
             ) : (
                 <>
@@ -97,31 +127,6 @@ const CameraComponent = () => {
                     </div>
                 </>
             )}
-
-            <style>
-                {`
-                    .capture-button, .toggle-button {
-                        padding: 15px 30px; /* Increased padding for better visibility */
-                        font-size: 18px; /* Increased font size */
-                        background-color: rgba(255, 255, 255, 0.8); /* Light background for better contrast */
-                        border: none; 
-                        border-radius: 5px;
-                        cursor: pointer;
-                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-                    }
-
-                    .capture-button:hover, .toggle-button:hover {
-                        background-color: rgba(255, 255, 255, 1); /* Slightly darker on hover */
-                    }
-
-                    @media (max-width: 600px) {
-                        .capture-button, .toggle-button {
-                            font-size: 16px;
-                            padding: 12px 24px; /* Adjusted padding for mobile */
-                        }
-                    }
-                `}
-            </style>
         </div>
     );
 };
