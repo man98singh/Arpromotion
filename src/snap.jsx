@@ -105,7 +105,7 @@ const CameraComponent = () => {
     };
 
     return (
-        <div style={{  height: '100vh', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', height: '100vh'}}>
             {capturedImage ? (
                 // Render the PreviewComponent if an image is captured
                 <>
