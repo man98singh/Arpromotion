@@ -35,11 +35,11 @@ export default async (req, res) => {
             return res.status(400).json({ message: 'Request body is required' });
         }
 
-        const { name, email, number } = body; // Assuming 'number' corresponds to the 'pnum' field in the DB
+        const { name, email, number } = body; // Ensure `number` is used
 
         try {
             const query = 'INSERT INTO users (name, email, pnum) VALUES ($1, $2, $3)';
-            const values = [name, email, number]; // Use 'number' here, which will be mapped to 'pnum'
+            const values = [name, email, number]; // Use `number` here
             await client.query(query, values);
 
             res.status(200).json({ message: 'Details submitted successfully!' });
