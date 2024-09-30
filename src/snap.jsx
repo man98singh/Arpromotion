@@ -40,7 +40,7 @@ const CameraComponent = () => {
         // Try applying the lens
         try {
             const lens = await cameraKit.lensRepository.loadLens(
-                '48b170de-f6f8-4e6a-a57b-be18b322d148',
+                'ac5758f4-cfbc-446a-bd94-72947eb437e5',
                 'f029c812-af38-419f-a7dc-5c953e78ea98'
             );
             await session.applyLens(lens);
