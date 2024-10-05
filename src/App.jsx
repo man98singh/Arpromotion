@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ConsentPopup from './popup';
 import CameraComponent from './CameraComponent';
-import Details from './Details';
+import Details from './details';
 
 const App = () => {
     const [hasAgreed, setHasAgreed] = useState(false);
