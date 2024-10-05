@@ -5,8 +5,9 @@ import CaptureControls from './CaptureCamera';
 import ImagePreview from './ImagePreview';
 import './snapstyle.css';
 
-const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera }) => {
+const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onContinue }) => {
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
+    const [showContinueButton, setShowContinueButton] = useState(false);
     const sessionRef = useRef(null);
 
     const setupCamera = async (liveRenderTargetRef) => {
@@ -41,7 +42,16 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera }) => {
     useEffect(() => {
         return () => {
             if (sessionRef.current) {
-                sessionRef.current.stop();
+                // Safely attempt to stop the session
+                if (typeof sessionRef.current.stop === 'function') {
+                    sessionRef.current.stop();
+                } else {
+                    // If stop is not available, try to clean up in other ways
+                    if (sessionRef.current.source && typeof sessionRef.current.source.getTracks === 'function') {
+                        sessionRef.current.source.getTracks().forEach(track => track.stop());
+                    }
+                }
+                sessionRef.current = null;
             }
         };
     }, []);
@@ -49,6 +59,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera }) => {
     const handleCaptureImage = (canvas) => {
         const imageUrl = canvas.toDataURL('image/png');
         onImageCapture(imageUrl);
+        setShowContinueButton(true);
     };
 
     const toggleCamera = () => {
@@ -77,14 +88,26 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera }) => {
         }
     };
 
+    const handleContinue = () => {
+        setShowContinueButton(false);
+        onContinue();
+    };
+
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
-                <ImagePreview 
-                    capturedImage={capturedImage} 
-                    onBack={onBackToCamera} 
-                    onShare={shareImage}
-                />
+                <>
+                    <ImagePreview 
+                        capturedImage={capturedImage} 
+                        onBack={onBackToCamera} 
+                        onShare={shareImage}
+                    />
+                    {showContinueButton && (
+                        <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}>
+                            <button onClick={handleContinue} className="continue-button">Continue</button>
+                        </div>
+                    )}
+                </>
             ) : (
                 <>
                     <LiveCamera 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ConsentPopup from './popup'
+import ConsentPopup from './popup';
 import CameraComponent from './CameraComponent';
 import Details from './Details';
 
@@ -14,6 +14,9 @@ const App = () => {
 
     const handleImageCapture = (imageUrl) => {
         setCapturedImage(imageUrl);
+    };
+
+    const handleContinue = () => {
         setShowDetails(true);
     };
 
@@ -28,12 +31,16 @@ const App = () => {
                 <ConsentPopup onAgree={handleAgreement} />
             ) : (
                 <>
-                    <CameraComponent 
-                        onImageCapture={handleImageCapture}
-                        capturedImage={capturedImage}
-                        onBackToCamera={handleBackToCamera}
-                    />
-                    {showDetails && <Details />}
+                    {!showDetails ? (
+                        <CameraComponent 
+                            onImageCapture={handleImageCapture}
+                            capturedImage={capturedImage}
+                            onBackToCamera={handleBackToCamera}
+                            onContinue={handleContinue}
+                        />
+                    ) : (
+                        <Details />
+                    )}
                 </>
             )}
         </div>

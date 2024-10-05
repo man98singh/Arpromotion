@@ -12,7 +12,19 @@
 .capture-button:hover, .toggle-button:hover {
     background-color: rgba(255, 255, 255, 1); /* Slightly darker on hover */
 }
+.continue-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
+.continue-button:hover {
+    background-color: #45a049;
+}
 .back-button {
     padding: 10px 20px;
     font-size: 16px;
