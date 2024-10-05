@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CameraComponent from './snap';
 const ConsentPopup = ({ onAgree }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
