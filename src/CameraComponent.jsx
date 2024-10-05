@@ -25,18 +25,6 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
 
         const mediaStream = await navigator.mediaDevices.getUserMedia({ video: videoConstraints });
         await session.setSource(mediaStream);
-
-        // iOS-specific adjustments
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-            const videoTrack = mediaStream.getVideoTracks()[0];
-            const capabilities = videoTrack.getCapabilities();
-            if (capabilities.deviceId) {
-                await videoTrack.applyConstraints({
-                    advanced: [{ zoom: 1 }] // Reset zoom
-                });
-            }
-        }
-
         await session.play();
 
         try {
@@ -50,7 +38,73 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         }
     };
 
-    // Rest of the component remains the same...
+    useEffect(() => {
+        return () => {
+            if (sessionRef.current) {
+                if (typeof sessionRef.current.stop === 'function') {
+                    sessionRef.current.stop();
+                } else if (sessionRef.current.source && typeof sessionRef.current.source.getTracks === 'function') {
+                    sessionRef.current.source.getTracks().forEach(track => track.stop());
+                }
+                sessionRef.current = null;
+            }
+        };
+    }, []);
+
+    const handleCaptureImage = (canvas) => {
+        const imageUrl = canvas.toDataURL('image/png');
+        onImageCapture(imageUrl);
+    };
+
+    const toggleCamera = () => {
+        setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
+    };
+
+    const shareImage = async () => {
+        if (capturedImage) {
+            const blob = await fetch(capturedImage).then(res => res.blob());
+            const file = new File([blob], 'captured-image.png', { type: 'image/png' });
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Check out this image!',
+                        text: 'Here is the image I captured.',
+                        files: [file],
+                    });
+                    console.log('Image shared successfully');
+                } catch (error) {
+                    console.error('Error sharing the image:', error);
+                }
+            } else {
+                alert('Sharing is not supported on this browser.');
+            }
+        }
+    };
+
+    return (
+        <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+            {capturedImage ? (
+                <ImagePreview 
+                    capturedImage={capturedImage} 
+                    onBack={onBackToCamera} 
+                    onShare={shareImage}
+                    onContinue={onContinue}
+                />
+            ) : (
+                <>
+                    <LiveCamera 
+                        setupCamera={setupCamera} 
+                        cameraFacingMode={cameraFacingMode}
+                    />
+                    <CaptureControls 
+                        onCapture={() => handleCaptureImage(document.getElementById('canvas'))}
+                        onToggleCamera={toggleCamera}
+                    />
+                </>
+            )}
+        </div>
+    );
 };
 
 export default CameraComponent;
