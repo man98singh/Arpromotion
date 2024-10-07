@@ -5,47 +5,16 @@ import CaptureControls from './CaptureCamera';
 import ImagePreview from './ImagePreview';
 import './snapstyle.css';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { bootstrapCameraKit } from '@snap/camera-kit';
-
 const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onContinue }) => {
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
-    const cameraKitRef = useRef(null);
-    const lensRef = useRef(null);
-
-    useEffect(() => {
-        let isMounted = true;
-
-        const initializeCameraKit = async () => {
-            if (!cameraKitRef.current) {
-                cameraKitRef.current = await bootstrapCameraKit({
-                    apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-                });
-            }
-
-            if (!lensRef.current) {
-                lensRef.current = await cameraKitRef.current.lensRepository.loadLens(
-                    '8da5d561-1b8d-4391-8ea2-32906c0c718f',
-                    'f029c812-af38-419f-a7dc-5c953e78ea98'
-                );
-            }
-        };
-
-        initializeCameraKit();
-
-        return () => {
-            isMounted = false;
-        };
-    }, []);
 
     const setupCamera = async (liveRenderTargetRef) => {
-        if (!cameraKitRef.current || !lensRef.current) {
-            console.error("CameraKit or Lens not initialized");
-            return;
-        }
+        const cameraKit = await bootstrapCameraKit({
+            apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
+        });
 
-        const session = await cameraKitRef.current.createSession({ liveRenderTarget: liveRenderTargetRef.current });
+        const session = await cameraKit.createSession({ liveRenderTarget: liveRenderTargetRef.current });
         sessionRef.current = session;
 
         const videoConstraints = {
@@ -59,7 +28,11 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         await session.play();
 
         try {
-            await session.applyLens(lensRef.current);
+            const lens = await cameraKit.lensRepository.loadLens(
+                '8da5d561-1b8d-4391-8ea2-32906c0c718f',
+                'f029c812-af38-419f-a7dc-5c953e78ea98'
+            );
+            await session.applyLens(lens);
         } catch (error) {
             console.error("Failed to apply lens:", error);
         }
@@ -83,23 +56,9 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         onImageCapture(imageUrl);
     };
 
-    const [isSwitching, setIsSwitching] = useState(false);
-
-    const toggleCamera = async () => {
-        setIsSwitching(true);
+    const toggleCamera = () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
-    
-        if (sessionRef.current) {
-            await sessionRef.current.stop();
-            sessionRef.current = null;
-        }
-    
-        setTimeout(async () => {
-            await setupCamera(liveRenderTargetRef);
-            setIsSwitching(false);
-        }, 500);
     };
- 
 
     const shareImage = async () => {
         if (capturedImage) {
@@ -144,10 +103,6 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     />
                 </>
             )}
-              <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
-        {isSwitching && <div className="loading-indicator">Switching Camera...</div>}
-        {/* The rest of your component */}
-    </div>
         </div>
     );
 };
