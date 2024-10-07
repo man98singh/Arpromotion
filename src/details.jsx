@@ -22,7 +22,7 @@ const Details = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
+//yoo
             const data = await response.json();
             console.log('Success:', data);
             // Reset input fields after successful submission
