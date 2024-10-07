@@ -56,15 +56,24 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         onImageCapture(imageUrl);
     };
 
-    const toggleCamera =  async () => {
+    const [isSwitching, setIsSwitching] = useState(false);
+
+    const toggleCamera = async () => {
+        setIsSwitching(true);  // Show loading indicator
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
+    
         if (sessionRef.current) {
             await sessionRef.current.stop();
             sessionRef.current = null;
         }
-
-        await setupCamera(liveRenderTargetRef); 
+    
+        setTimeout(async () => {
+            await setupCamera(liveRenderTargetRef);
+            setIsSwitching(false);  // Hide loading indicator once done
+        }, 500);
     };
+    
+ 
 
     const shareImage = async () => {
         if (capturedImage) {
@@ -109,6 +118,10 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     />
                 </>
             )}
+              <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        {isSwitching && <div className="loading-indicator">Switching Camera...</div>}
+        {/* The rest of your component */}
+    </div>
         </div>
     );
 };
