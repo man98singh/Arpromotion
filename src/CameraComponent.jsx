@@ -127,7 +127,21 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             }
         }
     };
+    const saveImageToDevice = async () => {
+        if (capturedImage) {
+            const blob = await fetch(capturedImage).then(res => res.blob());
 
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'captured-image.png';  // The name of the file
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);  // Clean up after download
+        } else {
+            alert('No image captured to save.');
+        }
+    };
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
@@ -135,7 +149,9 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     capturedImage={capturedImage} 
                     onBack={onBackToCamera} 
                     onShare={shareImage}
-                    onContinue={onContinue}
+                    onContinue={() => {
+                        onContinue();  // Continue action
+                        saveImageToDevice();}}  // Save the image when continue is clicked
                 />
             ) : (
                 <>
