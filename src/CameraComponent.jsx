@@ -9,7 +9,37 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
 
+    // Request motion and orientation permissions for iOS devices
+    const requestMotionPermission = async () => {
+        if (typeof DeviceMotionEvent !== 'undefined' &&
+            typeof DeviceMotionEvent.requestPermission === 'function') {
+            try {
+                const permissionState = await DeviceMotionEvent.requestPermission();
+                if (permissionState === 'granted') {
+                    console.log('Motion and Orientation permission granted');
+                    return 'granted';
+                } else {
+                    console.log('Motion and Orientation permission denied');
+                    return 'denied';
+                }
+            } catch (error) {
+                console.error('Error requesting Motion and Orientation permission:', error);
+                return 'error';
+            }
+        }
+        // Assume permission is granted if the API is not available (non-iOS devices)
+        return 'granted';
+    };
+
     const setupCamera = async (liveRenderTargetRef) => {
+        // Request motion and orientation permission before setting up the camera
+        const permissionState = await requestMotionPermission();
+        
+        if (permissionState !== 'granted') {
+            alert('Motion and Orientation permission is required for this feature to work.');
+            return;
+        }
+
         try {
             const cameraKit = await bootstrapCameraKit({
                 apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
@@ -40,7 +70,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 } catch (error) {
                     console.error("Failed to apply lens:", error);
                 }
-            }, 5000);  // Adjust delay if needed
+            }, 500);  // Adjust delay if needed
 
         } catch (error) {
             console.error("Failed to initialize camera:", error);
@@ -67,6 +97,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
 
     const toggleCamera = async () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
+
         // Reinitialize the camera when switching
         if (sessionRef.current) {
             await sessionRef.current.stop();
