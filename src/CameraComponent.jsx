@@ -8,12 +8,11 @@ import './snapstyle.css';
 const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onContinue }) => {
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
-
     const setupCamera = async (liveRenderTargetRef) => {
         const cameraKit = await bootstrapCameraKit({
             apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
         });
-
+    
         const session = await cameraKit.createSession({ liveRenderTarget: liveRenderTargetRef.current });
         sessionRef.current = session;
 
@@ -59,7 +58,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     const [isSwitching, setIsSwitching] = useState(false);
 
     const toggleCamera = async () => {
-        setIsSwitching(true);  // Show loading indicator
+        setIsSwitching(true);
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
     
         if (sessionRef.current) {
@@ -69,10 +68,9 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     
         setTimeout(async () => {
             await setupCamera(liveRenderTargetRef);
-            setIsSwitching(false);  // Hide loading indicator once done
+            setIsSwitching(false);
         }, 500);
     };
-    
  
 
     const shareImage = async () => {
