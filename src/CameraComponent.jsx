@@ -56,8 +56,14 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         onImageCapture(imageUrl);
     };
 
-    const toggleCamera = () => {
+    const toggleCamera =  async () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
+        if (sessionRef.current) {
+            await sessionRef.current.stop();
+            sessionRef.current = null;
+        }
+
+        await setupCamera(liveRenderTargetRef); 
     };
 
     const shareImage = async () => {
