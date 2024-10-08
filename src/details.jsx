@@ -5,9 +5,7 @@ const Details = ({ capturedImage, onShare }) => {
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         const userDetails = { name, email, number };
 
         try {
@@ -25,19 +23,24 @@ const Details = ({ capturedImage, onShare }) => {
 
             const data = await response.json();
             console.log('Success:', data);
+            alert('Successfully registered!');
             // Reset input fields after successful submission
             setName('');
             setEmail('');
             setNumber('');
+            return true;
         } catch (error) {
             console.error('Error:', error);
+            return false;
         }
     };
 
-    const handleShareClick = () => {
-        if (capturedImage) {
-            onShare();
-        } else {
+    const handleShareClick = async () => {
+        const isSubmitted = await handleSubmit();  // Submit the form first
+
+        if (isSubmitted && capturedImage) {
+            onShare();  // Proceed with sharing if submission is successful
+        } else if (!capturedImage) {
             alert('No image available to share.');
         }
     };
@@ -45,7 +48,7 @@ const Details = ({ capturedImage, onShare }) => {
     return (
         <div>
             <h2>Submit Your Details</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => e.preventDefault()}>  {/* Prevent default form submission */}
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input
@@ -76,12 +79,10 @@ const Details = ({ capturedImage, onShare }) => {
                         required
                     />
                 </div>
-                <button type="submit">Submit</button>
             </form>
 
-           
-                    <button onClick={handleShareClick}>Share Image</button>
-          
+            {/* Share button triggers both form submission and image share */}
+            <button onClick={handleShareClick}>Share Image</button>
         </div>
     );
 };
