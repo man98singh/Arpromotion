@@ -110,7 +110,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         if (capturedImage) {
             const blob = await fetch(capturedImage).then(res => res.blob());
             const file = new File([blob], 'captured-image.png', { type: 'image/png' });
-
+    
             if (navigator.share) {
                 try {
                     await navigator.share({
@@ -137,6 +137,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         const body = `Here is the image I captured: ${capturedImage}`;
         window.location.href = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
+    
 
     const saveImageToDevice = async () => {
         if (capturedImage) {
@@ -157,15 +158,16 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
-                <ImagePreview 
-                    capturedImage={capturedImage} 
-                    onBack={onBackToCamera} 
-                    onShare={shareImage}
-                    onContinue={() => {
-                        onContinue();  // Continue action
-                        saveImageToDevice();  // Save the image when continue is clicked
-                    }}
-                />
+           <ImagePreview 
+           capturedImage={capturedImage} 
+           onBack={onBackToCamera} 
+           onShare={() => shareImage(email)}  // Use email state here for sharing
+           onContinue={() => {
+               onContinue();  // Continue action
+               saveImageToDevice();  // Save the image when continue is clicked
+           }}
+       />
+       
             ) : (
                 <>
                     <LiveCamera 

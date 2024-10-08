@@ -4,12 +4,15 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
     const [email, setEmail] = useState('');
 
     const handleShare = () => {
-        if (email) {
-            onShare(email);
-        } else {
+        if (email && capturedImage) {
+            onShare(email);  // Call onShare with the email address
+        } else if (!email) {
             alert('Please enter an email address to share the image.');
+        } else {
+            alert('No image available to share.');
         }
     };
+    
 
     return (
         <>
