@@ -9,6 +9,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
     const [email, setEmail] = useState('');
+
     // Request motion and orientation permissions for iOS devices
     const requestMotionPermission = async () => {
         if (typeof DeviceMotionEvent !== 'undefined' &&
@@ -43,7 +44,6 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         try {
             const cameraKit = await bootstrapCameraKit({
                 apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
-            
             });
 
             const session = await cameraKit.createSession({ liveRenderTarget: liveRenderTargetRef.current });
@@ -89,17 +89,6 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             }
         };
     }, []);
-    const handleShareWithEmail = () => {
-        if (email) {
-            // Open email client with pre-filled details
-            const subject = 'Check out this image!';
-            const body = `Here is the image I captured: ${capturedImage}`;
-            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        } else {
-            alert('Please enter an email address to share the image.');
-        }
-    };
-    
 
     const handleCaptureImage = (canvas) => {
         const imageUrl = canvas.toDataURL('image/png');
@@ -114,10 +103,10 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             await sessionRef.current.stop();
             sessionRef.current = null;
         }
-        setupCamera(liveRenderTargetRef);
+        setupCamera(document.getElementById('canvas'));
     };
 
-    const shareImage = async () => {
+    const shareImage = async (emailAddress) => {
         if (capturedImage) {
             const blob = await fetch(capturedImage).then(res => res.blob());
             const file = new File([blob], 'captured-image.png', { type: 'image/png' });
@@ -126,18 +115,29 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 try {
                     await navigator.share({
                         title: 'Check out this image!',
-                        text: 'Here is the image I captured.',
+                        text: `Here is the image I captured. Send it to: ${emailAddress}`,
                         files: [file],
+                        url: window.location.href
                     });
                     console.log('Image shared successfully');
                 } catch (error) {
                     console.error('Error sharing the image:', error);
+                    // Fallback to email client if Web Share API fails
+                    openEmailClient(emailAddress);
                 }
             } else {
-                alert('Sharing is not supported on this browser.');
+                // Fallback to email client if Web Share API is not supported
+                openEmailClient(emailAddress);
             }
         }
     };
+
+    const openEmailClient = (emailAddress) => {
+        const subject = 'Check out this image!';
+        const body = `Here is the image I captured: ${capturedImage}`;
+        window.location.href = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
     const saveImageToDevice = async () => {
         if (capturedImage) {
             const blob = await fetch(capturedImage).then(res => res.blob());
@@ -153,6 +153,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             alert('No image captured to save.');
         }
     };
+
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
             {capturedImage ? (
@@ -162,15 +163,9 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     onShare={shareImage}
                     onContinue={() => {
                         onContinue();  // Continue action
-                        saveImageToDevice();}}  // Save the image when continue is clicked
-                        
-                ><input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                placeholder="Enter your email to share" 
-                style={{ margin: '10px', padding: '10px', width: '80%' }}
-            /> </ImagePreview>
+                        saveImageToDevice();  // Save the image when continue is clicked
+                    }}
+                />
             ) : (
                 <>
                     <LiveCamera 

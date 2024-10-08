@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
-const ImagePreview = ({ capturedImage, onBack, onContinue }) => {
+const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
     const [email, setEmail] = useState('');
 
-    const handleShareWithEmail = () => {
+    const handleShare = () => {
         if (email) {
-            const subject = 'Check out this image!';
-            const body = `Here is the image I captured: ${capturedImage}`;
-            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            onShare(email);
         } else {
             alert('Please enter an email address to share the image.');
         }
@@ -23,27 +21,27 @@ const ImagePreview = ({ capturedImage, onBack, onContinue }) => {
                 transform: 'translateX(-50%)', 
                 zIndex: 4, 
                 display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center',
                 gap: '10px',
-                flexWrap: 'wrap',
-                justifyContent: 'center'
+                width: '80%'
             }}>
-                <button className="back-button" onClick={onBack}>Back to Camera</button>
-                {/* Email input field for sharing */}
                 <input 
                     type="email" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
-                    placeholder="Enter your email to share" 
+                    placeholder="Enter email to share" 
                     style={{ 
-                        margin: '10px', 
                         padding: '10px', 
-                        width: '80%', 
-                        zIndex: 1, 
-                        position: 'relative' 
+                        width: '100%', 
+                        zIndex: 1
                     }}
                 />
-                <button className="share-button" onClick={handleShareWithEmail}>Share Image</button>
-                <button className="continue-button" onClick={onContinue}>Continue</button>
+                <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', width: '100%' }}>
+                    <button className="back-button" onClick={onBack}>Back to Camera</button>
+                    <button className="share-button" onClick={handleShare}>Share</button>
+                    <button className="continue-button" onClick={onContinue}>Continue</button>
+                </div>
             </div>
         </>
     );
