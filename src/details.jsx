@@ -82,9 +82,10 @@ const Details = ({ capturedImage, onShare }) => {
             </form>
 
             {/* Share button triggers both form submission and image share */}
-            <button onClick={handleShareClick} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+            <button onClick={handleShareClick} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }}>
     Share Image
 </button>
+
 
         </div>
     );
