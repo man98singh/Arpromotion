@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const ImagePreview = ({ capturedImage, onBack, onShare, onContinue }) => {
+const ImagePreview = ({ capturedImage, onBack, onContinue }) => {
+    const [email, setEmail] = useState('');
+
+    const handleShareWithEmail = () => {
+        if (email) {
+            const subject = 'Check out this image!';
+            const body = `Here is the image I captured: ${capturedImage}`;
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        } else {
+            alert('Please enter an email address to share the image.');
+        }
+    };
+
     return (
         <>
             <img src={capturedImage} alt="Captured" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -16,7 +28,21 @@ const ImagePreview = ({ capturedImage, onBack, onShare, onContinue }) => {
                 justifyContent: 'center'
             }}>
                 <button className="back-button" onClick={onBack}>Back to Camera</button>
-                <button className="share-button" onClick={onShare}>Share Image</button>
+                {/* Email input field for sharing */}
+                <input 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="Enter your email to share" 
+                    style={{ 
+                        margin: '10px', 
+                        padding: '10px', 
+                        width: '80%', 
+                        zIndex: 1, 
+                        position: 'relative' 
+                    }}
+                />
+                <button className="share-button" onClick={handleShareWithEmail}>Share Image</button>
                 <button className="continue-button" onClick={onContinue}>Continue</button>
             </div>
         </>

@@ -8,7 +8,7 @@ import './snapstyle.css';
 const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onContinue }) => {
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const sessionRef = useRef(null);
-
+    const [email, setEmail] = useState('');
     // Request motion and orientation permissions for iOS devices
     const requestMotionPermission = async () => {
         if (typeof DeviceMotionEvent !== 'undefined' &&
@@ -89,6 +89,17 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             }
         };
     }, []);
+    const handleShareWithEmail = () => {
+        if (email) {
+            // Open email client with pre-filled details
+            const subject = 'Check out this image!';
+            const body = `Here is the image I captured: ${capturedImage}`;
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        } else {
+            alert('Please enter an email address to share the image.');
+        }
+    };
+    
 
     const handleCaptureImage = (canvas) => {
         const imageUrl = canvas.toDataURL('image/png');
@@ -152,7 +163,14 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     onContinue={() => {
                         onContinue();  // Continue action
                         saveImageToDevice();}}  // Save the image when continue is clicked
-                />
+                        
+                ><input 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                placeholder="Enter your email to share" 
+                style={{ margin: '10px', padding: '10px', width: '80%' }}
+            /> </ImagePreview>
             ) : (
                 <>
                     <LiveCamera 
