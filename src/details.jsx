@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Details = () => {
+const Details = ({ capturedImage, onShare }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
@@ -22,16 +22,23 @@ const Details = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-//yoo
+
             const data = await response.json();
             console.log('Success:', data);
             // Reset input fields after successful submission
             setName('');
             setEmail('');
             setNumber('');
-            //yoo
         } catch (error) {
             console.error('Error:', error);
+        }
+    };
+
+    const handleShareClick = () => {
+        if (capturedImage) {
+            onShare();
+        } else {
+            alert('No image available to share.');
         }
     };
 
@@ -71,6 +78,10 @@ const Details = () => {
                 </div>
                 <button type="submit">Submit</button>
             </form>
+
+           
+                    <button onClick={handleShareClick}>Share Image</button>
+          
         </div>
     );
 };

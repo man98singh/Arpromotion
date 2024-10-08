@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './popup.css';  // Import the popup.css file
+
 const ConsentPopup = ({ onAgree }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
@@ -18,7 +20,7 @@ const ConsentPopup = ({ onAgree }) => {
 
     return (
         isVisible && (
-            <div style={styles.popup}>
+            <div className="popup">
                 <h2>Consent Agreement latest</h2>
                 <p>
                     By entering this application, you agree to abide by all conditions set forth. 
@@ -32,8 +34,8 @@ const ConsentPopup = ({ onAgree }) => {
                     />
                     I agree to follow all conditions
                 </label>
-                <div style={styles.buttonContainer}>
-                    <button onClick={handleSubmit} style={styles.button}>
+                <div className="button-container">
+                    <button onClick={handleSubmit} className="button">
                         Submit
                     </button>
                 </div>
@@ -42,27 +44,4 @@ const ConsentPopup = ({ onAgree }) => {
     );
 };
 
-const styles = {
-    popup: {
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        padding: '20px',
-        backgroundColor: '#fff',
-        color:'black',
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-        zIndex: 1000,
-    },
-    buttonContainer: {
-        marginTop: '20px',
-        textAlign: 'center',
-    },
-    button: {
-        padding: '10px 20px',
-        fontSize: '16px',
-    },
-};
 export default ConsentPopup;
