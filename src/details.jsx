@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
-const Details = ({ capturedImage, onShare }) => {
+const Details = ({ capturedImage, onShare, onReset }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
 
-    // Regular expression for a valid phone number (10 digits)
     const phoneNumberRegex = /^[0-9]{10}$/;
 
-    // Function to validate inputs
     const validateForm = () => {
         if (!name.trim()) {
             alert('Please enter your name.');
@@ -26,7 +24,7 @@ const Details = ({ capturedImage, onShare }) => {
             alert('Please enter a valid 10-digit phone number.');
             return false;
         }
-        return true; // If all fields are valid
+        return true;
     };
 
     const handleSubmit = async () => {
@@ -48,7 +46,6 @@ const Details = ({ capturedImage, onShare }) => {
             const data = await response.json();
             console.log('Success:', data);
             alert('Successfully registered!');
-            // Reset input fields after successful submission
             setName('');
             setEmail('');
             setNumber('');
@@ -60,14 +57,13 @@ const Details = ({ capturedImage, onShare }) => {
     };
 
     const handleShareClick = async () => {
-        // Validate the form first
         const isFormValid = validateForm();
 
         if (isFormValid) {
-            const isSubmitted = await handleSubmit(); // Submit the form
+            const isSubmitted = await handleSubmit();
 
             if (isSubmitted && capturedImage) {
-                onShare();  // Proceed with sharing if submission is successful
+                onShare();
             } else if (!capturedImage) {
                 alert('No image available to share.');
             }
@@ -77,7 +73,7 @@ const Details = ({ capturedImage, onShare }) => {
     return (
         <div>
             <h2>Submit Your Details</h2>
-            <form onSubmit={(e) => e.preventDefault()}>  {/* Prevent default form submission */}
+            <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input
@@ -110,10 +106,17 @@ const Details = ({ capturedImage, onShare }) => {
                 </div>
             </form>
 
-            {/* Share button triggers both form submission and image share */}
             <button onClick={handleShareClick} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }}>
                 Share Image
             </button>
+
+            {/* Add the reset button */}
+            <button onClick={() => {
+    console.log('Reset clicked in Details');
+    onReset();
+}} style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px', marginLeft: '10px' }}>
+    Reset
+</button>
         </div>
     );
 };

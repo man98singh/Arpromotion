@@ -6,7 +6,7 @@ import ImagePreview from './ImagePreview';
 import './snapstyle.css';
 
 const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onContinue }) => {
-    const [cameraFacingMode, setCameraFacingMode] = useState('environment');
+    const [cameraFacingMode, setCameraFacingMode] = useState('user');
     const sessionRef = useRef(null);
     const [email, setEmail] = useState('');
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ConsentPopup from './popup';
 import CameraComponent from './CameraComponent';
 import Details from './details';
-import './App.css'
+import './App.css';
 
 const App = () => {
     const [hasAgreed, setHasAgreed] = useState(false);
@@ -50,6 +50,19 @@ const App = () => {
         }
     };
 
+    // Reset function to go back to the beginning
+    const resetApp = () => {
+        setHasAgreed(false);
+        setCapturedImage(null);
+        setShowDetails(false);
+        const resetApp = () => {
+            console.log('Reset button clicked');
+            setHasAgreed(false);
+            setCapturedImage(null);
+            setShowDetails(false);
+        };
+    };
+
     return (
         <div>
             {!hasAgreed ? (
@@ -64,7 +77,11 @@ const App = () => {
                             onContinue={handleContinue}
                         />
                     ) : (
-                        <Details capturedImage={capturedImage} onShare={shareImage} />
+                        <Details 
+                            capturedImage={capturedImage} 
+                            onShare={shareImage} 
+                            onReset={resetApp} // Pass the reset function to Details
+                        />
                     )}
                 </>
             )}
