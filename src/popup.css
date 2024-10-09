@@ -7,7 +7,10 @@
     
 }
 
-
+body {
+    background-image: url('assets/backgrounds/4x/Asset\ 6@4x.png');
+    background-size: cover;
+}
 .popup {
     font-family: 'CustomFont', sans-serif;
     position: fixed;
