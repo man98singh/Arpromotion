@@ -2,22 +2,18 @@
 .capture-button, .toggle-button {
     padding: 15px 30px; /* Increased padding for better visibility */
     font-size: 18px; /* Increased font size */
-    background-color: rgba(255, 255, 255, 0.8); /* Light background for better contrast */
+    /* Light background for better contrast */
     border: none; 
-    border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .capture-button:hover, .toggle-button:hover {
-    background-color: rgba(255, 255, 255, 1); /* Slightly darker on hover */
+   /* Slightly darker on hover */
 }
 .continue-button {
     padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+   
     border: none;
-    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
 }
@@ -61,15 +57,15 @@
 .capture-button, .toggle-button {
     padding: 15px 30px; /* Increased padding for better visibility */
     font-size: 18px; /* Increased font size */
-    background-color: rgba(255, 255, 255, 0.8); /* Light background for better contrast */
+ /* Light background for better contrast */
     border: none; 
-    border-radius: 5px;
+
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  
 }
 
 .capture-button:hover, .toggle-button:hover {
-    background-color: rgba(255, 255, 255, 1); /* Slightly darker on hover */
+
 }
 
 @media (max-width: 600px) {

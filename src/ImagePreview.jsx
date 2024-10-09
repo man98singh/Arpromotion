@@ -29,9 +29,16 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
             }}>
                 
                 <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', width: '100%' }}>
-                    <button className="back-button" onClick={onBack}>Back to Camera</button>
+                    
+                    <img  style={{ cursor: 'pointer', width: '60px', height: '60px' }}src="\buttons\fretryAsset 13.png" alt="retry" className='back-button' onClick={onBack} />
                     {/* <button className="share-button" onClick={handleShare}>Share2</button> */}
-                    <button className="continue-button" onClick={onContinue}>Continue</button>
+                    <img src="\buttons\fcontinueAsset 14.png"  // Update the path to your image
+                    alt="Continue"
+                className="continue-button"
+                onClick={onContinue}
+                style={{ cursor: 'pointer', width: '60px', height: '60px' }} // Adjust the size as needed
+            />
+                    
                 </div>
             </div>
         </>
