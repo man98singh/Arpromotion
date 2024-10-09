@@ -7,9 +7,7 @@
     cursor: pointer;
 }
 
-.capture-button:hover, .toggle-button:hover {
-   /* Slightly darker on hover */
-}
+
 .continue-button {
     padding: 10px 20px;
    
@@ -64,9 +62,6 @@
   
 }
 
-.capture-button:hover, .toggle-button:hover {
-
-}
 
 @media (max-width: 600px) {
     .capture-button, .toggle-button {

@@ -5,6 +5,30 @@ const Details = ({ capturedImage, onShare }) => {
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
 
+    // Regular expression for a valid phone number (10 digits)
+    const phoneNumberRegex = /^[0-9]{10}$/;
+
+    // Function to validate inputs
+    const validateForm = () => {
+        if (!name.trim()) {
+            alert('Please enter your name.');
+            return false;
+        }
+        if (!email.trim()) {
+            alert('Please enter your email.');
+            return false;
+        }
+        if (!number.trim()) {
+            alert('Please enter your phone number.');
+            return false;
+        }
+        if (!phoneNumberRegex.test(number)) {
+            alert('Please enter a valid 10-digit phone number.');
+            return false;
+        }
+        return true; // If all fields are valid
+    };
+
     const handleSubmit = async () => {
         const userDetails = { name, email, number };
 
@@ -36,12 +60,17 @@ const Details = ({ capturedImage, onShare }) => {
     };
 
     const handleShareClick = async () => {
-        const isSubmitted = await handleSubmit();  // Submit the form first
+        // Validate the form first
+        const isFormValid = validateForm();
 
-        if (isSubmitted && capturedImage) {
-            onShare();  // Proceed with sharing if submission is successful
-        } else if (!capturedImage) {
-            alert('No image available to share.');
+        if (isFormValid) {
+            const isSubmitted = await handleSubmit(); // Submit the form
+
+            if (isSubmitted && capturedImage) {
+                onShare();  // Proceed with sharing if submission is successful
+            } else if (!capturedImage) {
+                alert('No image available to share.');
+            }
         }
     };
 
@@ -70,7 +99,7 @@ const Details = ({ capturedImage, onShare }) => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="number">Number:</label>
+                    <label htmlFor="number">Phone Number:</label>
                     <input
                         type="text"
                         id="number"
@@ -83,10 +112,8 @@ const Details = ({ capturedImage, onShare }) => {
 
             {/* Share button triggers both form submission and image share */}
             <button onClick={handleShareClick} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }}>
-    Share Image
-</button>
-
-
+                Share Image
+            </button>
         </div>
     );
 };
