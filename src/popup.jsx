@@ -21,6 +21,7 @@ const ConsentPopup = ({ onAgree }) => {
     return (
         isVisible && (
             <div className="popup">
+                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" />
                 <h2>Consent Agreement latest</h2>
                 <p>
                     By entering this application, you agree to abide by all conditions set forth. 
