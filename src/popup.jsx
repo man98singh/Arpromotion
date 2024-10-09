@@ -21,25 +21,30 @@ const ConsentPopup = ({ onAgree }) => {
     return (
         isVisible && (
             <div className="popup">
-                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" />
-                <h2>Consent Agreement latest</h2>
+                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />
+                <h2>Διαγωνισμός
+                    για να είσαι μέσα σε όλα!
+                    Λάβε μέρος!</h2>
                 <p>
-                    By entering this application, you agree to abide by all conditions set forth. 
-                    Please confirm your agreement by checking the box below.
+                Αποδέχομαι τους <a href=''>όρους</a>
+                του διαγωνισμού.
                 </p>
+              
                 <label>
                     <input 
                         type="checkbox" 
                         checked={isChecked} 
                         onChange={handleCheckboxChange} 
                     />
-                    I agree to follow all conditions
+                   Επιθυμώ να λαμβάνω ενημερώσεις
+                σχετικά με προϊόντα και
+                νέες υπηρεσίες του Ομίλου ΔΕΗ.
                 </label>
-                <div className="button-container">
+                {/* <div className="button-container">
                     <button onClick={handleSubmit} className="button">
                         Submit
                     </button>
-                </div>
+                </div> */}
             </div>
         )
     );
