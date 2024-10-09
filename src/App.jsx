@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import ConsentPopup from './popup';
 import CameraComponent from './CameraComponent';
 import Details from './details';
+import ThankYou from './ThankYou';  // Import the new ThankYou component
 import './App.css';
 
 const App = () => {
     const [hasAgreed, setHasAgreed] = useState(false);
     const [capturedImage, setCapturedImage] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
+    const [showThankYou, setShowThankYou] = useState(false);  // State to show Thank You component
 
     const handleAgreement = () => {
         setHasAgreed(true);
@@ -40,12 +42,15 @@ const App = () => {
                         url: window.location.href
                     });
                     console.log('Image shared successfully');
+                    setShowThankYou(true);  // Show the Thank You component after sharing
                 } catch (error) {
                     console.error('Error sharing the image:', error);
                     openEmailClient(emailAddress); // Fallback
+                    setShowThankYou(true);  // Show Thank You even if the fallback is used
                 }
             } else {
                 openEmailClient(emailAddress); // Fallback
+                setShowThankYou(true);  // Show Thank You after fallback
             }
         }
     };
@@ -55,18 +60,15 @@ const App = () => {
         setHasAgreed(false);
         setCapturedImage(null);
         setShowDetails(false);
-        const resetApp = () => {
-            console.log('Reset button clicked');
-            setHasAgreed(false);
-            setCapturedImage(null);
-            setShowDetails(false);
-        };
+        setShowThankYou(false);  // Reset Thank You screen
     };
 
     return (
         <div>
             {!hasAgreed ? (
                 <ConsentPopup onAgree={handleAgreement} />
+            ) : showThankYou ? (  // If Thank You is true, show the Thank You component
+                <ThankYou onReset={resetApp} />  // Pass resetApp to Thank You component
             ) : (
                 <>
                     {!showDetails ? (
