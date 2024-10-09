@@ -4,10 +4,14 @@ import './popup.css';  // Import the popup.css file
 const ConsentPopup = ({ onAgree }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
-
+    const [newsLetter,setNewsletter] = useState(false);
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
+    const handleCheckboxChangeNewsletter = () => {
+        setNewsletter(!newsLetter);
+    };
+
 
     const handleSubmit = () => {
         if (isChecked) {
@@ -21,30 +25,33 @@ const ConsentPopup = ({ onAgree }) => {
     return (
         isVisible && (
             <div className="popup">
-                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />
                 <h2>Διαγωνισμός
-                    για να είσαι μέσα σε όλα!
-                    Λάβε μέρος!</h2>
-                <p>
-                Αποδέχομαι τους <a href=''>όρους</a>
-                του διαγωνισμού.
-                </p>
-              
-                <label>
-                    <input 
+                    για να είσαι μέσα σε όλα!</h2>
+                    <h4>Λάβε μέρος!</h4>
+                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />
+                
+                <p><input 
                         type="checkbox" 
                         checked={isChecked} 
                         onChange={handleCheckboxChange} 
+                    />
+                    
+                Αποδέχομαι τους <a href=''>όρους</a>
+                του διαγωνισμού.
+                
+                </p>
+              
+                <label>
+                <input 
+                        type="checkbox" 
+                        checked={newsLetter} 
+                        onChange={handleCheckboxChangeNewsletter} 
                     />
                    Επιθυμώ να λαμβάνω ενημερώσεις
                 σχετικά με προϊόντα και
                 νέες υπηρεσίες του Ομίλου ΔΕΗ.
                 </label>
-                {/* <div className="button-container">
-                    <button onClick={handleSubmit} className="button">
-                        Submit
-                    </button>
-                </div> */}
+                
             </div>
         )
     );
