@@ -5,28 +5,28 @@ const apistring = process.env.DATABASE_URL;
 
 if (!apistring) {
     console.error("DATABASE_URL environment variable not set.");
-    process.exit(1); // Exit if database connection string is not available
+    process.exit(1); 
 }
 
 const { Client } = pg;
 const client = new Client({
     connectionString: apistring,
     ssl: {
-        rejectUnauthorized: false, // Adjust based on your security requirements
+        rejectUnauthorized: false, 
     },
 });
 
-// Attempt to connect and handle connection errors
+
 client.connect((err) => {
     if (err) {
         console.error('Database connection error:', err);
-        process.exit(1); // Exit the process on connection failure
+        process.exit(1); 
     } else {
-        console.log('Connected to PostgreSQL database successfully');
+        console.log('Connected to  database successfully');
     }
 });
 
-// Main API function to handle requests
+
 export default async (req, res) => {
     if (req.method === 'POST') {
         const { body } = req;
@@ -35,11 +35,11 @@ export default async (req, res) => {
             return res.status(400).json({ message: 'Request body is required' });
         }
 
-        const { name, email, number } = body; // Ensure `number` is used
+        const { name, email, number } = body; 
 
         try {
             const query = 'INSERT INTO users (name, email, pnum) VALUES ($1, $2, $3)';
-            const values = [name, email, number]; // Use `number` here
+            const values = [name, email, number]; 
             await client.query(query, values);
 
             res.status(200).json({ message: 'Details submitted successfully!' });
