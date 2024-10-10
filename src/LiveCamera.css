@@ -10,7 +10,6 @@
     display: block;
     background-color: rgba(211, 211, 211, 0); 
     clip-path: polygon(15% 0%, 92% 0%, 85% 100%, 9% 100%);
-    border: 2px solid rgb(94, 221, 10);
 }
 
 .canvas-hidden {
