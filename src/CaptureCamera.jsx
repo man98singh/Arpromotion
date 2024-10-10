@@ -4,7 +4,7 @@ const CaptureControls = ({ onCapture}) => {
     return (
         <div style={{ 
             position: 'absolute', 
-            bottom: '80px', 
+            bottom: '-18px', 
             left: '50%', 
             transform: 'translateX(-50%)', 
             display: 'flex', 

@@ -15,7 +15,7 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
     return (
         <>      <div className='image-container'>
             <img className='image-preview' src={capturedImage} alt="Captured"  />
-            <div style={{ 
+            <div className="mukul"style={{ 
                 position: 'absolute', 
                 bottom: '40px', 
                 left: '50%', 
