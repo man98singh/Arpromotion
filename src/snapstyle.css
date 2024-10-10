@@ -56,7 +56,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 25px;
+    gap: 111px;
     z-index: 5;
     align-items: baseline;
 }
