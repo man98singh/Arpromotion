@@ -1,23 +1,31 @@
 import pg from 'pg';
 
+// Use the environment variable for the database connection string
+const apistring = process.env.DATABASE_URL;
+
+if (!apistring) {
+    console.error("DATABASE_URL environment variable not set.");
+    process.exit(1); 
+}
+
 const { Client } = pg;
+const client = new Client({
+    connectionString: apistring,
+    ssl: {
+        rejectUnauthorized: false, 
+    },
+});
 
-// A function to create a new database client and connect
-const connectToDatabase = async () => {
-    const apistring = process.env.DATABASE_URL;
 
-    if (!apistring) {
-        throw new Error("DATABASE_URL environment variable not set.");
+client.connect((err) => {
+    if (err) {
+        console.error('Database connection error:', err);
+        process.exit(1); 
+    } else {
+        console.log('Connected to  database successfully');
     }
+});
 
-    const client = new Client({
-        connectionString: apistring,
-        ssl: { rejectUnauthorized: false }
-    });
-
-    await client.connect();
-    return client;
-};
 
 export default async (req, res) => {
     if (req.method === 'POST') {
@@ -27,19 +35,12 @@ export default async (req, res) => {
             return res.status(400).json({ message: 'Request body is required' });
         }
 
-        const { name, email, number } = body;
+        const { name, email, number } = body; 
 
         try {
-            // Connect to the database for this request
-            const client = await connectToDatabase();
             const query = 'INSERT INTO users (name, email, pnum) VALUES ($1, $2, $3)';
-            const values = [name, email, number];
-            
-            // Execute the query
+            const values = [name, email, number]; 
             await client.query(query, values);
-
-            // Close the connection
-            await client.end();
 
             res.status(200).json({ message: 'Details submitted successfully!' });
         } catch (error) {
