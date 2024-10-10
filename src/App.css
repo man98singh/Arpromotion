@@ -3,13 +3,13 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  position: relative; /* Ensures child elements are contained within root */
-  overflow: hidden; /* Prevents overflow if children exceed the container */
+  position: relative; 
+  overflow: hidden; 
 }
 
 body {
   background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
-  background-size: contain; /* Ensure the background image fits */
+  background-size: contain; 
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
@@ -19,9 +19,9 @@ body {
 canvas {
   width: 100vw;
   height: 100vh;
-  object-fit: contain; /* Keep the video or camera feed aspect ratio */
-  z-index: 1; /* Ensure canvas is below other elements */
-  display: block; /* Ensure the canvas is a block-level element */
+  object-fit: contain; 
+  z-index: 1;
+  display: block; 
   top: 0;
   left: 0;
 }
