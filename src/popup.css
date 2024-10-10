@@ -1,23 +1,24 @@
 @font-face {
-    
-        font-family: 'CustomFont';
-        src:url('assets/fonts/MyriadPro-Regular_2.otf')format('opentype');
-        font-weight:normal;
-        font-style: normal;
-    
+    font-family: 'CustomFont';
+    src: url('assets/fonts/MyriadPro-Regular_2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
     background-image: url('assets/backgrounds/4x/Asset\ 6@4x.png');
     background-size: cover;
+    background-position: center center;
 }
-.popup a{
+
+.popup a {
     color: yellow;
-   
 }
-.popup img{
+
+.popup img {
     margin-top: 10%;
 }
+
 .popup {
     font-family: 'CustomFont', sans-serif;
     position: fixed;
@@ -27,6 +28,8 @@ body {
     padding: 20px;
     color: white;
     z-index: 1000;
+    max-width: 90%;
+    text-align: center;
 }
 
 .button-container {
@@ -37,4 +40,60 @@ body {
 .button {
     padding: 10px 20px;
     font-size: 16px;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .popup {
+        max-width: 80%;
+        font-size: 18px;
+    }
+
+    .popup img {
+        width: 30%;
+        margin-top: 5%;
+    }
+
+    .popup p, .popup label {
+        font-size: 18px;
+    }
+
+    .button {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+    .popup {
+        max-width: 60%;
+        font-size: 20px;
+    }
+
+    .popup img {
+        width: 25%;
+        margin-top: 4%;
+    }
+
+    .popup p, .popup label {
+        font-size: 20px;
+    }
+
+    .button {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .popup {
+        max-width: 90%;
+        font-size: 16px;
+    }
+
+    .popup img {
+        width: 40%;
+        margin-top: 15%;
+    }
+
+    .button {
+        font-size: 18px;
+    }
 }
