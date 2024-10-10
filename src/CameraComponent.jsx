@@ -149,7 +149,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         if (capturedImage) {
             const blob = await fetch(capturedImage).then(res => res.blob());
 
-            // Create a download link
+         
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = 'captured-image.png';
@@ -160,7 +160,8 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     };
 
     return (
-        <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        // <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        <div>
             {error && <div className="error-message">{error}</div>}
             {capturedImage ? (
                 <ImagePreview 

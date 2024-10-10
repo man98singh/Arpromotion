@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import "./ImagePreview.css"
 const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
    
 
@@ -13,8 +13,8 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
     
 
     return (
-        <>
-            <img className='image-preview' src={capturedImage} alt="Captured" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <>      <div className='image-container'>
+            <img className='image-preview' src={capturedImage} alt="Captured"  />
             <div style={{ 
                 position: 'absolute', 
                 bottom: '40px', 
@@ -28,18 +28,15 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
                 width: '80%'
             }}>
                 
-                <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', width: '100%' , alignItems:'baseline' }}>
+                <div className="button-container">
                     
-                    <img  style={{ cursor: 'pointer', width: '60px', height: '60px' }}src="\buttons\fretryAsset 13.png" alt="retry" className='back-button' onClick={onBack} />
-                    {/* <button className="share-button" onClick={handleShare}>Share2</button> */}
-                    <img src="\buttons\fcontinueAsset 14.png"  
-                    alt="Continue"
-                className="continue-button"
-                onClick={onContinue}
-                style={{ cursor: 'pointer', width: '60px', height: '60px' }}
+                    <img  src="\buttons\fretryAsset 13.png" alt="retry" className='back-button' onClick={onBack} />
+                    <img src="\buttons\fcontinueAsset 14.png"   alt="Continue"className="continue-button" onClick={onContinue}
+                
             />
                     
                 </div>
+            </div>
             </div>
         </>
     );

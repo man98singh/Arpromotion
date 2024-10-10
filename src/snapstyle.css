@@ -18,7 +18,7 @@ body {
   }
   
 .continue-button {
-    padding: 10px 20px;
+   
    
     border: none;
     font-size: 16px;
@@ -30,24 +30,22 @@ body {
     }
   }
 
-.continue-button:hover {
-    background-color: #45a049;
-}
+
 .back-button {
-    padding: 10px 20px;
+    
     font-size: 16px;
     margin-top: 20px;
 }
 
 @media (max-width: 600px) {
-    .capture-button, .toggle-button {
+    .capture-button {
         font-size: 16px;
         padding: 62px 24px; 
     }
 
     .back-button {
         font-size: 14px;
-        padding: 8px 16px;
+        
     }
 }
 
