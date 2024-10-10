@@ -52,9 +52,9 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     
             // Define video constraints
             const videoConstraints = {
-                width: { ideal: 1280, min: 640, max: 1920 },  // Handle multiple resolutions
+                width: { ideal: 1280, min: 640, max: 1920 },  
                 height: { ideal: 720, min: 480, max: 1080 },
-                facingMode: cameraFacingMode  // Either 'user' or 'environment' based on toggle
+                facingMode: cameraFacingMode  
             };
     
             console.log("getting user media");
@@ -67,7 +67,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             console.log("Canvas Reference:", canvasRef.current);
     
             console.log("playing session");
-            await session.play();  // Play the video feed on the canvas
+            await session.play();  
     
             // Mark camera as ready
             setIsCameraReady(true);
@@ -98,11 +98,16 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
         return () => {
             if (sessionRef.current) {
                 console.log("stopping camera session");
-                sessionRef.current.stop();
+                sessionRef.current.destroy();
                 sessionRef.current = null;
             }
         };
     }, [setupCamera]);
+    useEffect(() => {
+        if (!capturedImage) {
+            setupCamera(); 
+        }
+    }, [capturedImage, setupCamera]);
 
     const handleCaptureImage = () => {
         if (canvasRef.current) {

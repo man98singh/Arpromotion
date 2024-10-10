@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CaptureControls = ({ onCapture, onToggleCamera }) => {
+const CaptureControls = ({ onCapture}) => {
     return (
         <div style={{ 
             position: 'absolute', 
