@@ -60,7 +60,7 @@ canvas {
     }
 
     .canvas-visible {
-        clip-path: polygon(10% 0%, 90% 0%, 87% 100%, 10% 100%);
+        clip-path: polygon(20% 0%,88% 0%,82% 100%,12% 100%);
     }
 
     canvas {
