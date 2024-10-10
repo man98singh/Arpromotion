@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import ThankYou from './ThankYou'; 
 
 const Details = ({ capturedImage, onShare, onReset }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState('');
+    const [showThankYou, setShowThankYou] = useState(false);  
 
     const phoneNumberRegex = /^[0-9]{10}$/;
 
@@ -49,6 +51,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
             setName('');
             setEmail('');
             setNumber('');
+            setShowThankYou(true); 
             return true;
         } catch (error) {
             console.error('Error:', error);
@@ -69,6 +72,10 @@ const Details = ({ capturedImage, onShare, onReset }) => {
             }
         }
     };
+
+    if (showThankYou) {
+        return <ThankYou />;  
+    }
 
     return (
         <div>
@@ -112,11 +119,11 @@ const Details = ({ capturedImage, onShare, onReset }) => {
 
             {/* Add the reset button */}
             <button onClick={() => {
-    console.log('Reset clicked in Details');
-    onReset();
-}} style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px', marginLeft: '10px' }}>
-    Reset
-</button>
+                console.log('Reset clicked in Details');
+                onReset();
+            }} style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px', marginLeft: '10px' }}>
+                Reset
+            </button>
         </div>
     );
 };
