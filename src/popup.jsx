@@ -36,7 +36,7 @@ const ConsentPopup = ({ onAgree }) => {
                         onChange={handleCheckboxChange} 
                     />
                     
-                Αποδέχομαι τους <a href=''>όρους</a>
+                Αποδέχομαι τους <a href=''>όρους</a> &nbsp;
                 του διαγωνισμού.
                 
                 </p>

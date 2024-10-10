@@ -10,7 +10,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     const sessionRef = useRef(null);
     const [email, setEmail] = useState('');
 
-    // Request motion and orientation permissions for iOS devices
+    // permisson for ios motion control
     const requestMotionPermission = async () => {
         if (typeof DeviceMotionEvent !== 'undefined' &&
             typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -28,12 +28,12 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 return 'error';
             }
         }
-        // Assume permission is granted if the API is not available (non-iOS devices)
+       // in case of android 
         return 'granted';
     };
 
     const setupCamera = async (liveRenderTargetRef) => {
-        // Request motion and orientation permission before setting up the camera
+      
         const permissionState = await requestMotionPermission();
         
         if (permissionState !== 'granted') {
@@ -59,7 +59,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             await session.setSource(mediaStream);
             await session.play();
 
-            // Add a small delay before applying the lens to ensure proper initialization
+            // delay for test , not needed in prod
             setTimeout(async () => {
                 try {
                     const lens = await cameraKit.lensRepository.loadLens(
@@ -70,7 +70,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 } catch (error) {
                     console.error("Failed to apply lens:", error);
                 }
-            }, 500);  // Adjust delay if needed
+            }, 500);  
 
         } catch (error) {
             console.error("Failed to initialize camera:", error);
@@ -98,7 +98,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     const toggleCamera = async () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
 
-        // Reinitialize the camera when switching
+        // swtiching
         if (sessionRef.current) {
             await sessionRef.current.stop();
             sessionRef.current = null;
@@ -122,11 +122,11 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     console.log('Image shared successfully');
                 } catch (error) {
                     console.error('Error sharing the image:', error);
-                    // Fallback to email client if Web Share API fails
+                    // fallback to clinet
                     openEmailClient(emailAddress);
                 }
             } else {
-                // Fallback to email client if Web Share API is not supported
+              
                 openEmailClient(emailAddress);
             }
         }
@@ -146,10 +146,9 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             // Create a download link
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'captured-image.png';  // The name of the file
-            document.body.appendChild(link);
+            link.download = 'captured-image.png'; 
             link.click();
-            document.body.removeChild(link);  // Clean up after download
+            document.body.removeChild(link);  
         } else {
             alert('No image captured to save.');
         }
@@ -161,10 +160,10 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
            <ImagePreview 
            capturedImage={capturedImage} 
            onBack={onBackToCamera} 
-           onShare={() => shareImage(email)}  // Use email state here for sharing
+           onShare={() => shareImage(email)} 
            onContinue={() => {
-               onContinue();  // Continue action
-               saveImageToDevice();  // Save the image when continue is clicked
+               onContinue();  
+               saveImageToDevice(); 
            }}
        />
        

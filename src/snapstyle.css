@@ -7,7 +7,12 @@
     cursor: pointer;
 }
 
-
+canvas {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+  }
+  
 .continue-button {
     padding: 10px 20px;
    
