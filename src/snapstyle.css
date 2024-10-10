@@ -42,7 +42,7 @@ body {
 @media (max-width: 600px) {
     .capture-button, .toggle-button {
         font-size: 16px;
-        padding: 12px 24px; 
+        padding: 62px 24px; 
     }
 
     .back-button {

@@ -14,7 +14,7 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
 
     return (
         <>
-            <img className='image-preview' src={capturedImage} alt="Captured" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img className='image-preview' src={capturedImage} alt="Captured" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             <div style={{ 
                 position: 'absolute', 
                 bottom: '40px', 
