@@ -8,6 +8,7 @@ const LiveCamera = ({ canvasRef, isCameraReady }) => {
                 ref={canvasRef} 
                 className={isCameraReady ? 'canvas-visible' : 'canvas-hidden'} 
             />
+             <img src="public\buttons\Dark BG.png" alt="Overlay Image" className="overlay-image" />
             {!isCameraReady && <div>Loading camera</div>}
         </div>
     );
