@@ -15,8 +15,8 @@ const ConsentPopup = ({ onAgree }) => {
 
     const handleSubmit = () => {
         if (isChecked) {
-            onAgree(); // Call the onAgree function passed from App component
-            setIsVisible(false); // Close the popup
+            onAgree(); 
+            setIsVisible(false); 
         } else {
             alert("You must agree to the terms to proceed.");
         }
@@ -25,7 +25,7 @@ const ConsentPopup = ({ onAgree }) => {
     return (
         isVisible && (
             <div className="popup">
-                <h2>Διαγωνισμός
+                <h2>Διαγωνισμός<br/>
                     για να είσαι μέσα σε όλα!</h2>
                     <h4>Λάβε μέρος!</h4>
                   <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />

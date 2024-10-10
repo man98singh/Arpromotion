@@ -15,6 +15,9 @@ body {
     color: yellow;
    
 }
+.popup img{
+    margin-top: 10%;
+}
 .popup {
     font-family: 'CustomFont', sans-serif;
     position: fixed;

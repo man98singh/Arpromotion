@@ -1,0 +1,24 @@
+.camera-container {
+    position: relative;
+
+}
+
+.canvas-visible {
+   
+    display: block;
+}
+
+.canvas-hidden {
+ 
+    display: none;
+}
+canvas {
+    overflow:hidden ;
+    width: 100vw;
+    height: 100vh;
+    object-fit: none; 
+    z-index: 1;
+    display: block; 
+    top: 0;
+    left: 0;
+  }

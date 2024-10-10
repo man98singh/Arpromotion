@@ -1,17 +1,14 @@
 import React from 'react';
+import './LiveCamera.css';
 
 const LiveCamera = ({ canvasRef, isCameraReady }) => {
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <div className="camera-container">
             <canvas 
                 ref={canvasRef} 
-                style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    display: isCameraReady ? 'block' : 'none' 
-                }} 
+                className={isCameraReady ? 'canvas-visible' : 'canvas-hidden'} 
             />
-            {!isCameraReady && <div>Loading camera...</div>}
+            {!isCameraReady && <div>Loading camera</div>}
         </div>
     );
 };

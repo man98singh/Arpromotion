@@ -1,12 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
 #root {
-  max-width: 1280px;
+ 
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   position: relative; 
   overflow: hidden; 
 }
-
 body {
   background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
   background-size: contain; 
@@ -16,15 +21,7 @@ body {
   height: 100vh;
   overflow: hidden; 
 }
-canvas {
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain; 
-  z-index: 1;
-  display: block; 
-  top: 0;
-  left: 0;
-}
+
 
 .logo {
   height: 6em;
@@ -70,6 +67,9 @@ canvas {
 
 
 @media (max-width: 768px) {
+  body {
+    background-size: contain;
+  }
   #root {
     padding: 1rem;
   }
@@ -93,7 +93,9 @@ canvas {
   .logo {
     height: 3em;
   }
-
+    body {
+      background-size: contain;
+    }
   .button-container {
     bottom: 10px;
     gap: 3px;
