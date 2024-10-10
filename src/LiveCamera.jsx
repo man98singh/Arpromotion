@@ -1,16 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
-const LiveCamera = ({ setupCamera, cameraFacingMode }) => {
-    const liveRenderTargetRef = useRef(null);
-
-    useEffect(() => {
-        setupCamera(liveRenderTargetRef);
-    }, [setupCamera, cameraFacingMode]);
-
+const LiveCamera = ({ canvasRef, isCameraReady }) => {
     return (
-        <canvas ref={liveRenderTargetRef} id="canvas" style={{ width: '100%', height: '100%' }} />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <canvas 
+                ref={canvasRef} 
+                style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    display: isCameraReady ? 'block' : 'none' 
+                }} 
+            />
+            {!isCameraReady && <div>Loading camera...</div>}
+        </div>
     );
 };
 
 export default LiveCamera;
-

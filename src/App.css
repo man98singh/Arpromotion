@@ -1,29 +1,27 @@
-=#root {
+#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  position: relative; 
-  overflow: hidden; 
+  position: relative; /* Ensures child elements are contained within root */
+  overflow: hidden; /* Prevents overflow if children exceed the container */
 }
 
 body {
   background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
-  background-size: contain; 
+  background-size: contain; /* Ensure the background image fits */
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
   height: 100vh;
   overflow: hidden; 
 }
-
 canvas {
   width: 100vw;
   height: 100vh;
-  object-fit: contain;
-  z-index: 1; 
-  display: block; 
-  position: absolute;
+  object-fit: contain; /* Keep the video or camera feed aspect ratio */
+  z-index: 1; /* Ensure canvas is below other elements */
+  display: block; /* Ensure the canvas is a block-level element */
   top: 0;
   left: 0;
 }
@@ -34,6 +32,24 @@ canvas {
   will-change: filter;
   transition: filter 300ms;
   z-index: 2; 
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa); 
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 20s linear; 
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .card {
@@ -50,4 +66,37 @@ canvas {
   display: flex;
   gap: 10px;
   z-index: 3; 
+}
+
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 4em; 
+    padding: 1rem;
+  }
+
+  .button-container {
+    bottom: 15px;
+    gap: 5px;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 3em;
+  }
+
+  .button-container {
+    bottom: 10px;
+    gap: 3px;
+  }
+}
 }

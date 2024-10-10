@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import LiveCamera from './LiveCamera';
 import CaptureControls from './CaptureCamera';
@@ -8,109 +8,123 @@ import './snapstyle.css';
 const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onContinue }) => {
     const [cameraFacingMode, setCameraFacingMode] = useState('user');
     const sessionRef = useRef(null);
+    const canvasRef = useRef(null);
     const [email, setEmail] = useState('');
+    const [error, setError] = useState(null);
+    const [isCameraReady, setIsCameraReady] = useState(false);
 
-    // permisson for ios motion control
     const requestMotionPermission = async () => {
         if (typeof DeviceMotionEvent !== 'undefined' &&
             typeof DeviceMotionEvent.requestPermission === 'function') {
             try {
                 const permissionState = await DeviceMotionEvent.requestPermission();
-                if (permissionState === 'granted') {
-                    console.log('Motion and Orientation permission granted');
-                    return 'granted';
-                } else {
-                    console.log('Motion and Orientation permission denied');
-                    return 'denied';
-                }
+                return permissionState;
             } catch (error) {
                 console.error('Error requesting Motion and Orientation permission:', error);
                 return 'error';
             }
         }
-       // in case of android 
         return 'granted';
     };
 
-    const setupCamera = async (liveRenderTargetRef) => {
-      
+    const setupCamera = useCallback(async () => {
+        if (sessionRef.current) return;  // Prevent re-initializing the session if it already exists
+    
+        console.log("setting up camera");
+        setError(null);  // Clear any previous errors
+    
+        // Request motion permission for iOS devices
         const permissionState = await requestMotionPermission();
-        
         if (permissionState !== 'granted') {
-            alert('Motion and Orientation permission is required for this feature to work.');
+            setError('Motion and Orientation permission is required for this feature to work.');
             return;
         }
-
+    
         try {
+            // Initialize the Snap Camera Kit with the API token
             const cameraKit = await bootstrapCameraKit({
                 apiToken: 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzA1MTUxMzg0LCJzdWIiOiI3NDRiZTczYS1iODlmLTRkYzAtYjk1MC0yMDIyNGY2NjJjMGF-U1RBR0lOR35iZGM2ZTgyOS1iYTdhLTRmNDgtOGVlMC0wZWMyYjFlMjE1ZTYifQ.6HxXxLjUNOD9IV73x8tFcF11P4jDYGeD--7kW02iGho'
             });
-
-            const session = await cameraKit.createSession({ liveRenderTarget: liveRenderTargetRef.current });
-            sessionRef.current = session;
-
+    
+            console.log("creating session");
+            const session = await cameraKit.createSession({ liveRenderTarget: canvasRef.current });
+            sessionRef.current = session;  // Store the session reference for later cleanup
+    
+            // Define video constraints
             const videoConstraints = {
-                width: { ideal: 1920 },
-                height: { ideal: 1080 },
-                facingMode: cameraFacingMode
+                width: { ideal: 1280, min: 640, max: 1920 },  // Handle multiple resolutions
+                height: { ideal: 720, min: 480, max: 1080 },
+                facingMode: cameraFacingMode  // Either 'user' or 'environment' based on toggle
             };
-
+    
+            console.log("getting user media");
             const mediaStream = await navigator.mediaDevices.getUserMedia({ video: videoConstraints });
+            console.log("setting source");
             await session.setSource(mediaStream);
-            await session.play();
-
-            // delay for test , not needed in prod
+    
+            // Debugging logs
+            console.log("Media Stream:", mediaStream);
+            console.log("Canvas Reference:", canvasRef.current);
+    
+            console.log("playing session");
+            await session.play();  // Play the video feed on the canvas
+    
+            // Mark camera as ready
+            setIsCameraReady(true);
+            console.log("camera setup completed");
+    
+            // Optionally apply a lens after some delay
             setTimeout(async () => {
                 try {
                     const lens = await cameraKit.lensRepository.loadLens(
-                        '8da5d561-1b8d-4391-8ea2-32906c0c718f',
-                        'f029c812-af38-419f-a7dc-5c953e78ea98'
+                        '8da5d561-1b8d-4391-8ea2-32906c0c718f',  // Group ID
+                        'f029c812-af38-419f-a7dc-5c953e78ea98'   // Lens ID
                     );
-                    await session.applyLens(lens);
+                    await session.applyLens(lens);  // Apply the lens to the camera session
+                    console.log("lens applied successfully");
                 } catch (error) {
                     console.error("Failed to apply lens:", error);
                 }
-            }, 500);  
-
+            }, 500);
+    
         } catch (error) {
             console.error("Failed to initialize camera:", error);
+            setError("Failed to initialize camera. Please check your permissions and try again.");
         }
-    };
-
+    }, [cameraFacingMode]); 
     useEffect(() => {
+        setupCamera();
+
         return () => {
             if (sessionRef.current) {
-                if (typeof sessionRef.current.stop === 'function') {
-                    sessionRef.current.stop();
-                } else if (sessionRef.current.source && typeof sessionRef.current.source.getTracks === 'function') {
-                    sessionRef.current.source.getTracks().forEach(track => track.stop());
-                }
+                console.log("stopping camera session");
+                sessionRef.current.stop();
                 sessionRef.current = null;
             }
         };
-    }, []);
+    }, [setupCamera]);
 
-    const handleCaptureImage = (canvas) => {
-        const imageUrl = canvas.toDataURL('image/png');
-        onImageCapture(imageUrl);
+    const handleCaptureImage = () => {
+        if (canvasRef.current) {
+            const imageUrl = canvasRef.current.toDataURL('image/png');
+            onImageCapture(imageUrl);
+        }
     };
 
     const toggleCamera = async () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
-
-        // swtiching
         if (sessionRef.current) {
             await sessionRef.current.stop();
             sessionRef.current = null;
         }
-        setupCamera(document.getElementById('canvas'));
+        setupCamera();
     };
 
     const shareImage = async (emailAddress) => {
         if (capturedImage) {
             const blob = await fetch(capturedImage).then(res => res.blob());
             const file = new File([blob], 'captured-image.png', { type: 'image/png' });
-    
+
             if (navigator.share) {
                 try {
                     await navigator.share({
@@ -122,23 +136,15 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                     console.log('Image shared successfully');
                 } catch (error) {
                     console.error('Error sharing the image:', error);
-                    // fallback to clinet
                     openEmailClient(emailAddress);
                 }
             } else {
-              
                 openEmailClient(emailAddress);
             }
         }
     };
 
-    const openEmailClient = (emailAddress) => {
-        const subject = 'Check out this image!';
-        const body = `Here is the image I captured: ${capturedImage}`;
-        window.location.href = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    };
-    
-
+ 
     const saveImageToDevice = async () => {
         if (capturedImage) {
             const blob = await fetch(capturedImage).then(res => res.blob());
@@ -146,9 +152,8 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
             // Create a download link
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'captured-image.png'; 
+            link.download = 'captured-image.png';
             link.click();
-            document.body.removeChild(link);  
         } else {
             alert('No image captured to save.');
         }
@@ -156,25 +161,25 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
 
     return (
         <div style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+            {error && <div className="error-message">{error}</div>}
             {capturedImage ? (
-           <ImagePreview 
-           capturedImage={capturedImage} 
-           onBack={onBackToCamera} 
-           onShare={() => shareImage(email)} 
-           onContinue={() => {
-               onContinue();  
-               saveImageToDevice(); 
-           }}
-       />
-       
+                <ImagePreview 
+                    capturedImage={capturedImage} 
+                    onBack={onBackToCamera} 
+                    onShare={() => shareImage(email)} 
+                    onContinue={() => {
+                        onContinue();  
+                        saveImageToDevice(); 
+                    }}
+                />
             ) : (
                 <>
                     <LiveCamera 
-                        setupCamera={setupCamera} 
-                        cameraFacingMode={cameraFacingMode}
+                        canvasRef={canvasRef}
+                        isCameraReady={isCameraReady}
                     />
                     <CaptureControls 
-                        onCapture={() => handleCaptureImage(document.getElementById('canvas'))}
+                        onCapture={handleCaptureImage}
                         onToggleCamera={toggleCamera}
                     />
                 </>
