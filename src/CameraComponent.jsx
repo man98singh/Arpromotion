@@ -28,7 +28,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     };
 
     const setupCamera = useCallback(async () => {
-        if (sessionRef.current) return;  // Prevent re-initializing the session if it already exists
+     
     
         console.log("setting up camera");
         setError(null);  // Clear any previous errors
@@ -119,7 +119,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
     const toggleCamera = async () => {
         setCameraFacingMode(prevMode => (prevMode === 'environment' ? 'user' : 'environment'));
         if (sessionRef.current) {
-            await sessionRef.current.stop();
+            await sessionRef.current.destroy();
             sessionRef.current = null;
         }
         setupCamera();

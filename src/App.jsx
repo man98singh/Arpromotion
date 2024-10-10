@@ -31,6 +31,7 @@ const App = () => {
     const handleBackToCamera = () => {
         setCapturedImage(null);
         setShowDetails(false);
+        console.log("its' triggering badck to camera");
     };
 
     const shareImage = async (emailAddress) => {
