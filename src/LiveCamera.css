@@ -8,6 +8,8 @@
 .canvas-visible {
    
     display: block;
+    background-color: lightgray; 
+    clip-path: polygon(15% 0%, 92% 0%, 85% 100%, 9% 100%);
 }
 
 .canvas-hidden {
