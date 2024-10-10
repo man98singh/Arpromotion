@@ -48,9 +48,9 @@ canvas {
         width: 100vw;
         height: 70vh;  
     }
-    .overlay-image{
+    /* .overlay-image{
         border: 2px solid rgb(164, 19, 231);
-    }
+    } */
     .canvas-visible {
         clip-path: polygon(17% 0%, 86% 0%, 78% 100%, 12% 100%);
     }
