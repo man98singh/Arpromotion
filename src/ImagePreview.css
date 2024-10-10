@@ -52,7 +52,7 @@
     .poweredby-image{
         
             position: absolute;  /* Position relative to the .image-container */
-            bottom: 167px;        /* Adjust to place it at the bottom */
+            bottom: 185px;        /* Adjust to place it at the bottom */
             right: 161px;         /* Adjust to place it in the right corner */
             width: 93px;         /* Adjust the size of the image */
             height: auto;
