@@ -1,5 +1,7 @@
 .camera-container {
+    padding-top:20px ;
     position: relative;
+    right:36px;
 
 }
 
@@ -15,8 +17,8 @@
 canvas {
     overflow:hidden ;
     width: 100vw;
-    height: 100vh;
-    object-fit: none; 
+    height: 75vh;
+    object-fit: contain; 
     z-index: 1;
     display: block; 
     top: 0;
