@@ -63,6 +63,7 @@ body {
   display: flex;
   gap: 10px;
   z-index: 3; 
+  border: 1px solid red;
 }
 
 

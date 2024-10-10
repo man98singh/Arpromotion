@@ -12,14 +12,12 @@ const CaptureControls = ({ onCapture, onToggleCamera }) => {
             zIndex: 1 
         }}>
             <img 
-                src="/buttons/fcameraAsset 12.png"  // Fixed the path to use forward slashes
+                src="/buttons/fcameraAsset 12.png"  
                 alt="Capture"
                 className="capture-button"
                 onClick={onCapture}
                 style={{ 
-                    cursor: 'pointer', 
-                    width: '60px', 
-                    height: '60px' 
+                    cursor: 'pointer'
                 }} 
             />
         </div>
