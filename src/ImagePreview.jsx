@@ -15,6 +15,7 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
     return (
         <>      <div className='image-container'>
             <img className='image-preview' src={capturedImage} alt="Captured"  />
+            <div className='poweredby'>
             <div className="mukul"style={{ 
                 position: 'absolute', 
                 bottom: '40px', 
@@ -26,7 +27,7 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
                 alignItems: 'center',
                 gap: '10px',
                 width: '80%'
-            }}>
+            }}> 
                 
                 <div className="button-container">
                     
@@ -36,6 +37,8 @@ const ImagePreview = ({ capturedImage, onBack, onContinue, onShare }) => {
             />
                     
                 </div>
+            </div>
+            <img src="\buttons\Dark BG.png" alt="Overlaytr Image" className='poweredby-image' />
             </div>
             </div>
         </>

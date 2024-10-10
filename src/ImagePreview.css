@@ -49,13 +49,25 @@
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .poweredby-image{
+        
+            position: absolute;  /* Position relative to the .image-container */
+            bottom: 167px;        /* Adjust to place it at the bottom */
+            right: 161px;         /* Adjust to place it in the right corner */
+            width: 93px;         /* Adjust the size of the image */
+            height: auto;
+            z-index: 5;          /* Ensure it's above the image-preview but below the buttons if needed */
+        
+    }
     .image-preview {
       border-radius: none;
       object-fit: contain;
     }
-
+    .overlay-image-preview-2{
+        bottom:100px;
+    }
     .image-container {
-        height: 900px;
+        height: 660px;
         clip-path: polygon(20% 0%, 89% 0%, 75% 100%, 12% 100%)
     }
 
