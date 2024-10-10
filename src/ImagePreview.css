@@ -1,26 +1,32 @@
 .image-preview {
-    object-fit: cover;  /* Adjusts the image to cover the container while maintaining aspect ratio */
+    object-fit: cover;
+    /* Adjusts the image to cover the container while maintaining aspect ratio */
     width: 100%;
     height: 100%;
-    border-radius: 10px;  /* Add subtle border-radius for a smoother look */
+    border-radius: 10px;
+    /* Add subtle border-radius for a smoother look */
 }
 
 .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;  /* Full height container to ensure the image covers the available space */
+    height: 100%;
+    /* Full height container to ensure the image covers the available space */
     margin-top: 50px;
-    position: relative;  /* Ensures buttons are placed over the image */
+    position: relative;
+    /* Ensures buttons are placed over the image */
 }
 
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 20px;  /* Increased gap for better spacing */
+    gap: 20px;
+    /* Increased gap for better spacing */
     position: absolute;
     bottom: 40px;
-    width: 100%;  /* Ensures buttons take the entire width */
+    width: 100%;
+    /* Ensures buttons take the entire width */
 }
 
 .button-container img {
@@ -31,17 +37,26 @@
 }
 
 .button-container img:hover {
-    transform: scale(1.1);  /* Slightly scale the button on hover */
+    transform: scale(1.1);
+    /* Slightly scale the button on hover */
 }
 
-.back-button, .share-button, .continue-button {
+.back-button,
+.share-button,
+.continue-button {
     width: 70px;
     height: 70px;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .image-preview {
-        border-radius: 15px;
+      border-radius: none;
+      object-fit: contain;
+    }
+
+    .image-container {
+        height: 900px;
+        clip-path: polygon(20% 0%, 89% 0%, 75% 100%, 12% 100%)
     }
 
     .button-container img {
