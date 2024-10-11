@@ -1,43 +1,6 @@
-.form-header{
-    background-color: #D7D7D7;
-    height:50vh;
-}
-.submit-button{
-    position: absolute;
-    height: auto;
-    width: 40%;
-    right: 205px;
-    bottom: -4px;
-}
-
-@media only screen and (max-width: 600px) {
-    /* Add your styles here */
-}
-
-@media only screen and (min-width: 601px) and (max-width: 768px) {
-    /* Add your styles here */
-}
-
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-    /* Add your styles here */
-}
-
-@media only screen and (min-width: 1025px) and (max-width: 1200px) {
-    /* Add your styles here */
-    #detail-header {
-        color: rgb(28, 211, 111);
-        font-size: 50px;
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
+    .form-header{
+        background-color: #D7D7D7;
+        top:50%;
     }
-}
-
-@media only screen and (min-width: 1201px) and (max-width: 1300px) {
-    /* Add your styles here */
-    #detail-header {
-        color: rgb(205, 240, 7);
-        font-size: 50px;
-    }
-}
-
-@media only screen and (min-width: 1301px) and (max-width: 1600px) {
-    /* Add your styles here */
 }
