@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { bootstrapCameraKit } from '@snap/camera-kit';
 import LiveCamera from './LiveCamera';
 import CaptureControls from './CaptureCamera';
+import html2canvas from 'html2canvas';
 import ImagePreview from './ImagePreview';
 import './snapstyle.css';
 
@@ -85,7 +86,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 } catch (error) {
                     console.error("Failed to apply lens:", error);
                 }
-            }, 500);
+            }, 0);
     
         } catch (error) {
             console.error("Failed to initialize camera:", error);
