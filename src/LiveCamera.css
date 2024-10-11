@@ -130,8 +130,10 @@ canvas {
         height: 90vh;
     }
     .overlay-image {
-        border: 4px solid rgb(255, 100, 100);
+        border: none;
         width: 200px;
+        right:368px;
+        bottom: 326px;
     }
     .canvas-visible {
         clip-path:  polygon(13% 0, 94% 0, 82% 100%, 0 100%);
