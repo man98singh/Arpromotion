@@ -83,19 +83,11 @@ const Details = ({ capturedImage, onShare, onReset }) => {
         
         <div className='form-header'>
 
-            <h2 className='detail-header'>Συμμετοχή manish
+            <h2 className='detail-header'>Συμμετοχή 
 στην κλήρωση
 & αποστολή
 της φωτογραφίας</h2>
-<img 
-                src="/buttons/fcameraAsset 12@2x.png"  
-                alt="Capture"
-                className="capture-button"
-                
-                style={{ 
-                    cursor: 'pointer'
-                }} 
-            />
+
             <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                     <h6 className='sub-header'>Πεδία υποχρεωτικής συμπλήρωσης:</h6>
@@ -136,7 +128,25 @@ const Details = ({ capturedImage, onShare, onReset }) => {
             
         </div>
         <div className="submit-button">
-        <img  src='/buttons/fsubmitAsset.png' alt='submit' onClick={handleShareClick}/>
+        <img 
+                src='/buttons/1.png' 
+                alt="Capture"
+                className="capture-button"
+                
+                style={{ 
+                    cursor: 'pointer'
+                }} onClick={handleShareClick}
+            />
+            <img 
+                src='/buttons/1.png' 
+                alt="Capture"
+                className="submit-button"
+                
+                style={{ 
+                    cursor: 'pointer'
+                }} onClick={handleShareClick}
+            />
+    
         </div>
         </>
     );
