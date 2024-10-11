@@ -86,7 +86,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
 στην κλήρωση
 & αποστολή
 της φωτογραφίας</h2>
-<img src='/buttons/popupbuttonAsset 7.png'/>
+<img src='/buttons/1.png'/>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                     <h6 className='sub-header'>Πεδία υποχρεωτικής συμπλήρωσης:</h6>
