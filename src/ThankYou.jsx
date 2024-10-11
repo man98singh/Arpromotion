@@ -1,15 +1,12 @@
 import React from 'react';
-
+import "./Thankyou.css"
 const ThankYou = ({ onReset }) => {
     return (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <h1>Thank You!</h1>
             <p>Your image has been shared successfully.</p>
-            <button 
-                onClick={onReset} 
-                style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }}>
-                Reset
-            </button>
+           
+            <img src='/buttons/frestartAsset 15@3x.png' onClick={onReset} alt="restart" className='restart-button'></img>
         </div>
     );
 };
