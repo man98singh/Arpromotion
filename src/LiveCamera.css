@@ -61,6 +61,26 @@ canvas {
         width: 100vw;
         height: 70vh;
     }
+   
+    .overlay-image {
+        border: none;
+        width: 131px;
+        right:191px;
+        bottom: 6px;
+    }
+    .capture-button-container {
+        position: absolute;
+        left: 49%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 1;
+        width: 30px;
+        height:80px;
+        right: 50px;
+        bottom: 1px;
+    }
+    
 }
 
 /* For larger tablets and smaller laptops (1024px - 1366px) */
@@ -149,9 +169,19 @@ canvas {
         border: none; 
         cursor: pointer;
     }
-    .capture-button-container{}
+    
     canvas {
         width: 100vw;
         height: 90vh;
     }
+    .capture-button-container {
+        position: absolute;
+        bottom: 252px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 1;
+    }
+    
 }
