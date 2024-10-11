@@ -86,7 +86,7 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 } catch (error) {
                     console.error("Failed to apply lens:", error);
                 }
-            }, 0);
+            }, 200);
     
         } catch (error) {
             console.error("Failed to initialize camera:", error);
