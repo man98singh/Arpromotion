@@ -27,7 +27,9 @@
    }
     .submit-button{
         position: relative;
-        bottom: -19px;
+        left: 50%;
+        bottom: 0px;
+        transform: translateX(-50%);
     }
     .submit-button img{
         width: 100px;
