@@ -2,7 +2,7 @@
 
 
 body {
-    background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
+    /* background-image: url('assets/backgrounds/4x/Asset 6@4x.png'); */
     background-size: contain; /* Ensure the background image fits */
     background-position: center;
     background-repeat: no-repeat;
