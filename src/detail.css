@@ -2,6 +2,52 @@ img {
     max-width: 100%;
     height: auto;
   }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* iPad-specific styles */
+  @media only screen 
+    and (min-device-width: 768px) 
+    and (max-device-width: 1024px) 
+    and (-webkit-min-device-pixel-ratio: 1) {
+    
+    /* Force image rendering */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+    
+    /* Ensure proper scaling */
+    .form-header img,
+    .submit-button img {
+      width: auto;
+      max-height: 100%;
+    }
+    
+    /* Adjust layout if necessary */
+    .form-header {
+      overflow: visible;
+    }
+    
+    /* Improve performance */
+    * {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+  }
+  
+  /* Fallback for image loading */
+  img {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+  
+  img[data-src] {
+    opacity: 0;
+  }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
     @font-face {
         font-family: 'CustomFont';
