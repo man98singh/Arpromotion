@@ -80,11 +80,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
 
     return (
         <>
-         <div className="thankyou-container">
-            <h1>Thank you!</h1>
-           
-            <img src='/buttons/frestartAsset 15@3x.png' onClick={onReset} alt="restart" className='restart-button'></img>
-        </div>
+        
         <div className='form-header'>
 
             <h2 className='detail-header'>Συμμετοχή manish

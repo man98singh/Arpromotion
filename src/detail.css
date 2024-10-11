@@ -1,4 +1,4 @@
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
+/* @media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
     @font-face {
         font-family: 'CustomFont';
         src: url('assets/fonts/MyriadPro-Regular_2.otf') format('opentype');
@@ -15,7 +15,7 @@
         top:0%;
         height: 30vh;
 
-    }
+    } 
   .detail-header{
     font-family: 'CustomFont', sans-serif;
     padding: 20px;
@@ -35,4 +35,4 @@
         width: 100px;
       
     }
-}
+} */
