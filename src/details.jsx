@@ -122,7 +122,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                 </div>
             </form>
             <div className="submit-button">
-            <img  src='/buttons/fsubmitAsset 16@2x.png' alt='submit' onClick={handleShareClick}/>
+            <img  src='/buttons/fsubmitAsset.png' alt='submit' onClick={handleShareClick}/>
             </div>
             
         </div>
