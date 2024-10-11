@@ -87,7 +87,15 @@ const Details = ({ capturedImage, onShare, onReset }) => {
 στην κλήρωση
 & αποστολή
 της φωτογραφίας</h2>
-<img src='/src/assets/1.png'/>
+<img 
+                src="/buttons/fcameraAsset 12@2x.png"  
+                alt="Capture"
+                className="capture-button"
+                
+                style={{ 
+                    cursor: 'pointer'
+                }} 
+            />
             <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                     <h6 className='sub-header'>Πεδία υποχρεωτικής συμπλήρωσης:</h6>
