@@ -88,7 +88,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
 & αποστολή
 της φωτογραφίας</h2>
 <img 
-                src="/buttons/1.png"  
+                src="/buttons/fcameraAsset 12@2x.png"  
                 alt="Capture"
                 className="capture-button"
                 
