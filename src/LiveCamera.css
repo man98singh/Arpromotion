@@ -52,7 +52,7 @@ canvas {
         height: 70vh;
     }
     .overlay-image {
-        border: none;
+       
     }
     .canvas-visible {
         clip-path: polygon(17% 0%, 86% 0%, 78% 100%, 12% 100%);
@@ -63,7 +63,7 @@ canvas {
     }
    
     .overlay-image {
-        border: none;
+        border: 2px solid green;
         width: 131px;
         right:191px;
         bottom: 6px;
@@ -163,7 +163,7 @@ canvas {
         height: 90vh;
     }
     .overlay-image {
-        border: none;
+        border: 2px solid green;
         width: 200px;
         right:368px;
         bottom: 326px;

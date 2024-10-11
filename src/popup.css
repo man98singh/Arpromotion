@@ -14,22 +14,26 @@ body {
 .popup a {
     color: yellow;
 }
-
+.popup-first{
+    width:800px;
+}
 .popup img {
     margin-top: 10%;
 }
 
 .popup {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     font-family: 'CustomFont', sans-serif;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
     color: white;
     z-index: 1000;
-    max-width: 90%;
     text-align: center;
+    align-items: center;
 }
 
 .button-container {
@@ -59,20 +63,80 @@ body {
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .popup-h4-input{
+        display: flex;
+        flex-direction: row;
+        align-content: stretch;
+        justify-content: space-between;
+        align-items: center;
+    
+    }
+    .popup-h4-input input{
+        width: 50px;
+       
+    }
+    .popup-h4-input-2-1{
+        text-align: start;
+        margin-bottom: 10%;
+        display: flex;
+        gap: 5px;
+        justify-content: space-around;
+    }
+    .popup-h4-input-2-2{
+        text-align: start;
+        display: flex;
+        justify-content: flex-start;
+        gap: 30px;
+        margin-bottom: 10%;
+
+
+    }
+    .popup-h4-input-2 input{
+        width: 20px;
+       
+    }
+    .popup-h4-input-2{
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .popup-img-flex{
+        margin-top: 10%;
+        width:180%;
+        display: flex;
+        justify-content: center;
+    }
     .popup {
-        max-width: 80%;
+       max-width: 100%;
+       max-height: 100%;
         font-size: 18px;
     }
-
+    .pop-first-title{
+        font-size: 35px;
+    }
+    .pop-second-title{
+        font-size: 34px;
+    }
     .popup img {
         width: 30%;
         margin-top: 5%;
     }
+    .popup-input-text{
+        text-align: start;
+        margin-bottom: 5%;
+        margin-right: 5%;
+        margin-top: 10%;
 
-    .popup p, .popup label {
-        font-size: 18px;
+        display: flex;
+        flex-direction: column;
     }
 
+    
+    .popup  input {
+        transform: scale(2);
+        
+    }
     .button {
         font-size: 20px;
     }
@@ -100,7 +164,7 @@ body {
 
 @media (max-width: 768px) {
     .popup {
-        max-width: 90%;
+       
         font-size: 16px;
     }
 
@@ -116,7 +180,7 @@ body {
 
 @media only screen and (min-width: 1366px) and (max-width: 1600px) {
     .popup {
-        max-width: 55%;
+      
         font-size: 22px;
     }
 

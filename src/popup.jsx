@@ -24,34 +24,57 @@ const ConsentPopup = ({ onAgree }) => {
 
     return (
         isVisible && (
+            <div className='popup-first'>
             <div className="popup">
-                <h2>Διαγωνισμός</h2>
-                    <h2>για να είσαι μέσα σε όλα!</h2>
-                    <h4>Λάβε μέρος!</h4>
-                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />
                 
-                <p><input 
+                <h2 className='pop-first-title'>Διαγωνισμός</h2>
+                    <h2 className='pop-second-title'>για να είσαι μέσα σε όλα!</h2>
+                    <h4>Λάβε μέρος!</h4>
+                    <div className='popup-img-flex'>
+                  <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />
+                </div>
+                <div className='popup-input-text'>
+                {/* <div className='popup-h4-input'>
+                <input 
+                        type="checkbox" 
+                        checked={isChecked} 
+                        onChange={handleCheckboxChange} 
+                    /><h4>
+                    
+                Αποδέχομαι τους <a href=''>όρους</a> <br/>
+                του διαγωνισμού.
+                
+                </h4>
+                </div> */}
+                <div className='popup-h4-input-2'>
+                  
+                <div className='popup-h4-input-2-2'>
+                <input 
                         type="checkbox" 
                         checked={isChecked} 
                         onChange={handleCheckboxChange} 
                     />
-                    
-                Αποδέχομαι τους <a href=''>όρους</a> &nbsp;
+                <h4>                
+                Αποδέχομαι τους <a href=''>όρους</a> <br/>
                 του διαγωνισμού.
-                
-                </p>
-              
-               <p>
+          </h4>
+          </div>
+          <div className='popup-h4-input-2-2'>
                 <input 
                         type="checkbox" 
                         checked={newsLetter} 
                         onChange={handleCheckboxChangeNewsletter} 
                     />
-                   Επιθυμώ να λαμβάνω ενημερώσεις
+                <h4>                
+                   Επιθυμώ να λαμβάνω ενημερώσεις<br/>
                 σχετικά με προϊόντα και
-                νέες υπηρεσίες του Ομίλου ΔΕΗ.
-          </p>
-                
+                νέες<br/> υπηρεσίες του Ομίλου ΔΕΗ.
+          </h4>
+          </div>
+             </div>
+                </div>
+           
+            </div>
             </div>
         )
     );

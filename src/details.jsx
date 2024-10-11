@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ThankYou from './ThankYou'; 
+import "./detail.css"
 
 const Details = ({ capturedImage, onShare, onReset }) => {
     const [name, setName] = useState('');
@@ -78,11 +79,14 @@ const Details = ({ capturedImage, onShare, onReset }) => {
     }
 
     return (
-        <div>
-            <h2>Submit Your Details</h2>
+        <div className='form-header'>
+
+            <h2 id='detail-header'>Submit Your Details</h2>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div>
+                    <p>this is the subline</p>
                     <label htmlFor="name">Name:</label>
+                    <br/>
                     <input
                         type="text"
                         id="name"
@@ -93,6 +97,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                 </div>
                 <div>
                     <label htmlFor="email">Email:</label>
+                    <br/>
                     <input
                         type="email"
                         id="email"
@@ -103,6 +108,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                 </div>
                 <div>
                     <label htmlFor="number">Phone Number:</label>
+                    <br/>
                     <input
                         type="text"
                         id="number"
@@ -112,11 +118,9 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                     />
                 </div>
             </form>
-
-            <button onClick={handleShareClick} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }}>
-                Share Image
-            </button>
-
+            <div className="submit-button">
+            <img  src='/buttons/fsubmitAsset 16@2x.png' alt='submit' onClick={handleShareClick}/>
+            </div>
             
         </div>
     );

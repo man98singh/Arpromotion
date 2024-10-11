@@ -1,4 +1,33 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('assets/fonts/MyriadPro-Regular_2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.thankyou-container{
+    text-align: center;
+    color: white;
+}
+
+.thankyou-container h1{
+    font-family: 'CustomFont', sans-serif;
+    font-size: 80px;
+}
+
+
 .restart-button{
     height: 100%;
     width: 100%;
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
+    .thankyou-container{
+        text-align: center;
+        color: rgb(255, 255, 255);
+    }
+    .restart-button{
+        height: 50%;
+        width: 50%;
+        margin-top: 10%;
+    }
 }
