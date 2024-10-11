@@ -25,8 +25,8 @@ const ConsentPopup = ({ onAgree }) => {
     return (
         isVisible && (
             <div className="popup">
-                <h2>Διαγωνισμός<br/>
-                    για να είσαι μέσα σε όλα!</h2>
+                <h2>Διαγωνισμός</h2>
+                    <h2>για να είσαι μέσα σε όλα!</h2>
                     <h4>Λάβε μέρος!</h4>
                   <img src="/buttons/popupbuttonAsset 7.png" alt="Logo" className="popup-image" onClick={handleSubmit} />
                 
@@ -41,7 +41,7 @@ const ConsentPopup = ({ onAgree }) => {
                 
                 </p>
               
-                <label>
+               <p>
                 <input 
                         type="checkbox" 
                         checked={newsLetter} 
@@ -50,7 +50,7 @@ const ConsentPopup = ({ onAgree }) => {
                    Επιθυμώ να λαμβάνω ενημερώσεις
                 σχετικά με προϊόντα και
                 νέες υπηρεσίες του Ομίλου ΔΕΗ.
-                </label>
+          </p>
                 
             </div>
         )

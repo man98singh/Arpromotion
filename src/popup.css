@@ -42,6 +42,22 @@ body {
     font-size: 16px;
 }
 
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .popup {
+        max-width: 95%;
+        font-size: 14px;
+    }
+
+    .popup img {
+        width: 50%;
+        margin-top: 20%;
+    }
+
+    .button {
+        font-size: 14px;
+    }
+}
+
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .popup {
         max-width: 80%;
@@ -95,5 +111,64 @@ body {
 
     .button {
         font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 1366px) and (max-width: 1600px) {
+    .popup {
+        max-width: 55%;
+        font-size: 22px;
+    }
+
+    .popup img {
+        width: 20%;
+        margin-top: 3%;
+    }
+
+    .popup p, .popup label {
+        font-size: 22px;
+    }
+
+    .button {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .popup {
+        max-width: 60%;
+        font-size: 24px;
+    }
+    h2{
+        font-size: 74px;
+    
+    }
+    h4{
+        font-size: 60px;
+    }
+    .popup img {
+        width: 20%;
+        margin-top: 2%;
+    }
+
+    .popup p {
+        font-size: 44px;
+        text-align: start;
+        margin-bottom: 3%;
+    }
+    .popup p input {
+        transform: scale(3.5);
+        margin-right: 5%;
+    }
+    
+
+    .button {
+        font-size: 26px;
+    }
+    .popup img{
+        margin-top: 10%;
+        margin-bottom: 10%;
+        height: max-content;
+        width: 40%;
     }
 }

@@ -103,3 +103,11 @@ body {
   }
 }
 }
+@media only screen and (min-width: 1600px) and (min-height: 2560px) and (aspect-ratio: 16/10) {
+  h2{
+    font-size: 10000px;
+  }
+}
+@media only screen and (min-width: 1752px) and (min-height: 2800px) and (aspect-ratio: 16/10) {
+  /* Add your custom styles for Samsung Tab S8+ here */
+}

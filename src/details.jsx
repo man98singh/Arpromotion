@@ -117,13 +117,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                 Share Image
             </button>
 
-            {/* Add the reset button */}
-            <button onClick={() => {
-                console.log('Reset clicked in Details');
-                onReset();
-            }} style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px', marginLeft: '10px' }}>
-                Reset
-            </button>
+            
         </div>
     );
 };
