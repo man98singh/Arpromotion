@@ -7,15 +7,16 @@
 }
 .capture-button-container {
     position: absolute;
-    left: 49%;
+    bottom: 50px;
+    left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
     z-index: 1;
-    width: 30px;
-    height:80px;
-    right: 50px;
-    bottom: 4vh;
 }
 .overlay-image {
     position: absolute;
