@@ -63,6 +63,17 @@ body {
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+   
+    .popup-first {
+        background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
+        height: 100vh; /* Take up 100% of the parent height */
+          /* Take up 100% of the parent width */
+        display: flex; /* Optional: Use flex to center content or align items */
+        justify-content: center; /* Optional: Center horizontally */
+        align-items: center;   /* Optional: Center vertically */
+        background-color: rgba(0, 0, 0, 0.5); /* Optional: Add background for a popup effect */
+    }
     .popup-h4-input{
         display: flex;
         flex-direction: row;

@@ -1,18 +1,25 @@
-* {
+
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
-
 #root {
+  
+  display: flex;  /* Optional: To center contents */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* Ensures the root fills at least the full viewport */
+    overflow: hidden; 
  
- 
-  padding: 2rem;
   text-align: center;
   position: relative; 
 }
+
+
 body {
-  background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
+
   background-size: contain; 
   background-position: center;
   background-repeat: no-repeat;
