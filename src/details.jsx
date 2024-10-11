@@ -81,10 +81,13 @@ const Details = ({ capturedImage, onShare, onReset }) => {
     return (
         <div className='form-header'>
 
-            <h2 id='detail-header'>Submit Your Details</h2>
+            <h2 className='detail-header'>Συμμετοχή
+στην κλήρωση
+& αποστολή
+της φωτογραφίας</h2>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div>
-                    <p>this is the subline</p>
+                    <h6 className='sub-header'>Πεδία υποχρεωτικής συμπλήρωσης:</h6>
                     <label htmlFor="name">Name:</label>
                     <br/>
                     <input
