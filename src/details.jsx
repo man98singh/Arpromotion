@@ -82,7 +82,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
         <>
         <div className='form-header'>
 
-            <h2 className='detail-header'>Συμμετοχή
+            <h2 className='detail-header'>Συμμετοχή manish
 στην κλήρωση
 & αποστολή
 της φωτογραφίας</h2>
