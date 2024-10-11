@@ -148,6 +148,8 @@ const CameraComponent = ({ onImageCapture, capturedImage, onBackToCamera, onCont
                 openEmailClient(emailAddress);
             }
         }
+    };const openEmailClient = (emailAddress) => {
+        window.location.href = `mailto:${emailAddress}?subject=Check%20out%20this%20image&body=Here%20is%20the%20image%20I%20captured.`;
     };
 
  
