@@ -1,3 +1,7 @@
+img {
+    max-width: 100%;
+    height: auto;
+  }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
     @font-face {
         font-family: 'CustomFont';
@@ -15,7 +19,11 @@
         top: 0%;
         height: 61vh;
 
+        
     } 
+    img {
+        image-rendering: -webkit-optimize-contrast;
+      }
   .detail-header{
     font-family: 'CustomFont', sans-serif;
     padding: 20px;
@@ -35,4 +43,13 @@
         width: 100px;
       
     }
+}
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
 }
