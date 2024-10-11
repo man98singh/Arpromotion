@@ -17,6 +17,7 @@
 
 
 .restart-button{
+    cursor: pointer;
     height: 100%;
     width: 100%;
 }
@@ -26,6 +27,7 @@
         color: rgb(255, 255, 255);
     }
     .restart-button{
+        cursor: pointer;
         height: 50%;
         width: 50%;
         margin-top: 10%;
