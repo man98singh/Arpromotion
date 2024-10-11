@@ -1,11 +1,5 @@
 
-.capture-button  {
-    padding: 15px 30px; 
-    font-size: 18px;
 
-    border: none; 
-    cursor: pointer;
-}
 
 body {
     background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
@@ -60,14 +54,7 @@ body {
     z-index: 5;
     align-items: baseline;
 }
-.capture-button {
-    padding: 15px 30px; 
-    font-size: 18px; 
-    border: none; 
 
-    cursor: pointer;
-  
-}
 
 
 @media (max-width: 600px) {
