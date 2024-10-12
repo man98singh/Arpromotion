@@ -11,9 +11,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100vh;
     /* Full height container to ensure the image covers the available space */
-    margin-top: 50px;
+
     position: relative;
     /* Ensures buttons are placed over the image */
 }
@@ -59,17 +59,11 @@
             z-index: 5;          /* Ensure it's above the image-preview but below the buttons if needed */
         
     }
-    .image-preview {
-      border-radius: none;
-      object-fit: contain;
-    }
+   
     .overlay-image-preview-2{
         bottom:100px;
     }
-    .image-container {
-        height: 660px;
-        clip-path: polygon(20% 0%, 89% 0%, 75% 100%, 12% 100%)
-    }
+   
 
     .button-container img {
         width: 70px;
