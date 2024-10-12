@@ -58,7 +58,7 @@
     
     font-size: 25px;
 }.form-label-input input{
-    transform: scale(2);
+    
 }
 .sub-header{
     font-family: 'CustomFont', sans-serif;
@@ -80,12 +80,12 @@
     }
     .form-header-inside{
         clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
-        right: -33vh;
-        width: 34vh;
+        right: -28vh;
+        width: 44vh;
         position: relative;
-        top: 31vh;
-        height: 50vh;
-        background-color:#d7d7d7;
+        top: 14vh;
+        height: 66vh;
+        background-color: #d7d7d7;
         flex-direction: column;
         display: flex;
     }
@@ -102,7 +102,7 @@
         
         font-size: 25px;
     }.form-label-input input{
-        transform: scale(1.5);
+        transform: scale(2);
     }
     .sub-header{
         font-family: 'CustomFont', sans-serif;
