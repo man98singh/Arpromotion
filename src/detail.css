@@ -38,6 +38,7 @@
     bottom: 25vh;
     transform: translate(-50%);
     cursor: pointer;
+    z-index: 100;
 }
 .form-header-inside{
     clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
@@ -51,7 +52,7 @@
     display: flex;
 }
 .form-label-input{
-    position: relative;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -74,11 +75,10 @@
         color:rgb(14, 14, 13);
        }
     .submit-button{
-        position: relative;
-        left: 50vh;
-        bottom: 25vh;
-        transform: translate(-50%);
-        z-index: 100;
+        position: fixed;
+        left: 37vh;
+        bottom: 41vh;
+        /* transform: translate(-50%); */
         cursor: pointer;
     }
     .form-header-inside{
@@ -112,13 +112,7 @@
         font-size: 25px;
        }
   
-    .submit-button{
-        position: relative;
-        left: 50vh;
-        bottom: 25vh;
-        transform: translate(-50%);
-        cursor: pointer;
-    }
+   
    
     img {
         image-rendering: -webkit-optimize-contrast;
