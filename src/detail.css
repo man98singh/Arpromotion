@@ -74,7 +74,6 @@
         color:rgb(14, 14, 13);
        }
     .submit-button{
-        position: fixed;
         left: 37vh;
         bottom: 41vh;
         /* transform: translate(-50%); */
@@ -112,9 +111,9 @@
        }
   
     .submit-button{
-        position: relative;
-        left: 50vh;
-        bottom: 25vh;
+        position: absolute;
+        left: 39vh;
+        bottom: 16vh;
         transform: translate(-50%);
         cursor: pointer;
     }
