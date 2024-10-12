@@ -38,7 +38,6 @@
     bottom: 25vh;
     transform: translate(-50%);
     cursor: pointer;
-    z-index: 100;
 }
 .form-header-inside{
     clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
@@ -52,7 +51,7 @@
     display: flex;
 }
 .form-label-input{
-    position: fixed;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -112,7 +111,13 @@
         font-size: 25px;
        }
   
-   
+    .submit-button{
+        position: relative;
+        left: 50vh;
+        bottom: 25vh;
+        transform: translate(-50%);
+        cursor: pointer;
+    }
    
     img {
         image-rendering: -webkit-optimize-contrast;
