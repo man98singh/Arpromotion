@@ -82,8 +82,8 @@ const Details = ({ capturedImage, onShare, onReset }) => {
         <>
         
         <div className='form-header'>
-
-            <h2 className='detail-header'>Συμμετοχή manish
+            <div className='form-header-inside'>
+            <h2 className='detail-header'>Συμμετοχή
 στην κλήρωση
 & αποστολή
 της φωτογραφίας</h2>
@@ -127,9 +127,11 @@ const Details = ({ capturedImage, onShare, onReset }) => {
             
             
         </div>
+        </div>
         <div className="submit-button">
         <img  src='/buttons/fcameraAsset 12@2x.png' alt='submit' onClick={handleShareClick}/>
         </div>
+        
         </>
     );
 };

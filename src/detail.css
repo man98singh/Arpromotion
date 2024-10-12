@@ -1,4 +1,37 @@
-
+.form-header {
+    background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    width: 100vh;
+    flex-direction: column;
+    
+    /* margin-top: 6%; */
+    /* width: 36vh; */
+    background-color: #d7d7d7;
+    /* margin-left: 15%; */
+    position: relative;
+    top: 0%;
+    height: 100vh;
+}
+.submit-button{
+    position: relative;
+    left: 50vh;
+    bottom: 25vh;
+    transform: translate(-50%);
+}
+.form-header-inside{
+    clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
+    right: -33vh;
+    width: 34vh;
+    position: relative;
+    top: 31vh;
+    height: 50vh;
+    background-color:#d7d7d7;
+    flex-direction: column;
+    display: flex;
+}
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
     @font-face {
         font-family: 'CustomFont';
@@ -6,18 +39,7 @@
         font-weight: normal;
         font-style: normal;
     }
-    .form-header{
-        clip-path: polygon(5% 0,100% 0,100% 53%,97% 53%,96% 100%,0 100%,0 48%,4% 48%);
-        margin-top: 6%;
-        width: 36vh;
-        background-color: #d7d7d7;
-        margin-left: 15%;
-        position: relative;
-        top: 0%;
-        height: 45vh;
-
-        
-    } 
+   
     img {
         image-rendering: -webkit-optimize-contrast;
       }
@@ -30,14 +52,6 @@
     font-family: 'CustomFont', sans-serif;
     font-size: 15px;
    }
-    .submit-button{
-        position: relative;
-        left: 23vh;
-        bottom: 3vh;
-        transform: translate(-50%);
-    }
-    .submit-button img{
-        width: 100px;
-      
-    }
+  
+    
 }
