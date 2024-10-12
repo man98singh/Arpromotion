@@ -73,12 +73,7 @@
         font-size: 32px;
         color:rgb(14, 14, 13);
        }
-    .submit-button{
-        left: 37vh;
-        bottom: 41vh;
-        /* transform: translate(-50%); */
-        cursor: pointer;
-    }
+    
     .form-header-inside{
         clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
         right: -28vh;
