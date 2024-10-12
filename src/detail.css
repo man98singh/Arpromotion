@@ -21,11 +21,16 @@
     top: 0%;
     height: 100vh;
 }
+.sub-header{
+    font-family: 'CustomFont', sans-serif;
+    font-size: 15px;
+   }
 .detail-header{
     font-family: 'CustomFont', sans-serif;
     padding: 20px;
-    font-size: 40px;
+    font-size: 20px;
     color:rgb(14, 14, 13);
+    margin-bottom: 0px;
    }
 .submit-button{
     position: relative;
@@ -36,12 +41,12 @@
 }
 .form-header-inside{
     clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
-    right: -33vh;
-    width: 34vh;
+    right: -28vh;
+    width: 44vh;
     position: relative;
-    top: 31vh;
-    height: 50vh;
-    background-color:#d7d7d7;
+    top: 14vh;
+    height: 66vh;
+    background-color: #d7d7d7;
     flex-direction: column;
     display: flex;
 }
@@ -56,14 +61,11 @@
 }
 .form-label-input label{
     
-    font-size: 25px;
+    font-size: 20px;
 }.form-label-input input{
     
 }
-.sub-header{
-    font-family: 'CustomFont', sans-serif;
-    font-size: 25px;
-   }
+
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
     .detail-header{
         font-family: 'CustomFont', sans-serif;
