@@ -83,15 +83,16 @@ const Details = ({ capturedImage, onShare, onReset }) => {
         
         <div className='form-header'>
             <div className='form-header-inside'>
-            <h2 className='detail-header'>Συμμετοχή
-στην κλήρωση
-& αποστολή
-της φωτογραφίας</h2>
+            <h2 className='detail-header'>Συμμετοχή<br/>
+                        στην κλήρωση<br/>
+                        & αποστολή<br/>
+                        της φωτογραφίας</h2>
 
             <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                     <h6 className='sub-header'>Πεδία υποχρεωτικής συμπλήρωσης:</h6>
-                    <label htmlFor="name">Name:</label>
+                    <div className='form-label-input'>
+                    <label htmlFor="name"><b>Ονοματεπώνυμο</b></label>
                     <br/>
                     <input
                         type="text"
@@ -100,9 +101,21 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
+               
+              
+                <div>
+                    <label htmlFor="number"><b>Τηλέφωνο</b></label>
+                    <br/>
+                    <input
+                        type="text"
+                        id="number"
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
+                        required
+                    />
                 </div>
                 <div>
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email"><b>Email:</b></label>
                     <br/>
                     <input
                         type="email"
@@ -112,16 +125,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="number">Phone Number:</label>
-                    <br/>
-                    <input
-                        type="text"
-                        id="number"
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)}
-                        required
-                    />
+                </div>
                 </div>
             </form>
             

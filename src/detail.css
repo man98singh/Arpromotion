@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('assets/fonts/MyriadPro-Regular_2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 .form-header {
     background-image: url('assets/backgrounds/4x/Asset 6@4x.png');
     background-size: contain; 
@@ -15,11 +21,18 @@
     top: 0%;
     height: 100vh;
 }
+.detail-header{
+    font-family: 'CustomFont', sans-serif;
+    padding: 20px;
+    font-size: 40px;
+    color:rgb(14, 14, 13);
+   }
 .submit-button{
     position: relative;
     left: 50vh;
     bottom: 25vh;
     transform: translate(-50%);
+    cursor: pointer;
 }
 .form-header-inside{
     clip-path: polygon(5% 0, 100% 0, 100% 53%, 97% 53%, 96% 100%, 0 100%, 0 48%, 4% 48%);
@@ -32,26 +45,40 @@
     flex-direction: column;
     display: flex;
 }
+.form-label-input{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+    left: 12vh;
+  
+}
+.form-label-input label{
+    
+    font-size: 25px;
+}.form-label-input input{
+    transform: scale(2);
+}
+.sub-header{
+    font-family: 'CustomFont', sans-serif;
+    font-size: 25px;
+   }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
-    @font-face {
-        font-family: 'CustomFont';
-        src: url('assets/fonts/MyriadPro-Regular_2.otf') format('opentype');
-        font-weight: normal;
-        font-style: normal;
+  
+    .submit-button{
+        position: relative;
+        left: 50vh;
+        bottom: 25vh;
+        transform: translate(-50%);
+        cursor: pointer;
     }
    
     img {
         image-rendering: -webkit-optimize-contrast;
       }
-  .detail-header{
-    font-family: 'CustomFont', sans-serif;
-    padding: 20px;
-    color:rgb(14, 14, 13);
-   }
-   .sub-header{
-    font-family: 'CustomFont', sans-serif;
-    font-size: 15px;
-   }
+ 
+
   
     
 }
