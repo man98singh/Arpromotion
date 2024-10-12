@@ -80,68 +80,84 @@ const Details = ({ capturedImage, onShare, onReset }) => {
 
     return (
         <>
-        
-        <div className='form-header'>
-            <div className='form-header-inside'>
-            <h2 className='detail-header'>Συμμετοχή<br/>
-                        στην κλήρωση<br/>
-                        & αποστολή<br/>
-                        της φωτογραφίας</h2>
-
-            <form onSubmit={(e) => e.preventDefault()}>
+          <div className="form-header">
+            <div className="form-header-inside">
+              <h2 className="detail-header">
+                Συμμετοχή
+                <br />
+                στην κλήρωση
+                <br />
+                & αποστολή
+                <br />
+                της φωτογραφίας
+              </h2>
+    
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div>
-                    <h6 className='sub-header'>Πεδία υποχρεωτικής συμπλήρωσης:</h6>
-                    <div className='form-label-input'>
-                    <label htmlFor="name"><b>Ονοματεπώνυμο</b></label>
-                    <br/>
+                  <h6 className="sub-header">Πεδία υποχρεωτικής συμπλήρωσης:</h6>
+                  <div className="form-label-input">
+                    <label htmlFor="name"
+                    className="name-label">
+                      Ονοματεπώνυμο
+                    </label>
+                    <br />
                     <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
+                      type="text"
+                      className="name-input"
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
                     />
-               
-              
-                <div>
-                    <label htmlFor="number"><b>Τηλέφωνο</b></label>
-                    <br/>
-                    <input
+    
+                    <div>
+                      <label htmlFor="number"
+                      className="number-label">
+                        Τηλέφωνο
+                      </label>
+                      <br />
+                      <input
                         type="text"
                         id="number"
+                        className="number-input"
                         value={number}
                         onChange={(e) => setNumber(e.target.value)}
                         required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email"><b>Email:</b></label>
-                    <br/>
-                    <input
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" 
+                      className="email-label">
+                        E-mail:
+                      </label>
+                      <br />
+                      <input
                         type="email"
-                        id="email"
+                        id="email" 
                         value={email}
+                        className="email-input"
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                    />
+                      />
+                    </div>
+                  </div>
                 </div>
-                </div>
-                </div>
-            </form>
-            
-            
-        </div>
-        </div>
-        <div className="submit-button">
-        <img  src='/buttons/dheeraj.png' alt='submit' onClick={handleShareClick} 
-       style={{ 
-        
-        width: '100px'
-    }} />
-        </div>
-        
+              </form>
+            </div>
+          </div>
+          <div className="submit-button">
+            <img
+              src="/buttons/dheeraj.png"
+              alt="submit"
+              onClick={handleShareClick}
+              style={{
+                width: "160px",
+              }}
+            />
+          </div>
         </>
-    );
-};
+      );
+    };
+
 
 export default Details;
