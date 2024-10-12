@@ -131,16 +131,17 @@
         
         font-size: 35px;
     }.form-label-input input{
+        color: black;
         background-color: white;
         border: none;
         width:28vh;
         height: 2vh;
     }
     .sub-header{
-    
+        color: black;
         top:3vh;
         right:0vh;
-        font-family: 'CustomFontBold';
+        font-family: 'CustomFontMedium';
         font-weight: 700;
         font-size: 21px;
        }
