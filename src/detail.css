@@ -49,7 +49,7 @@
     position: relative;
     top: 14vh;
     height: 66vh;
-    background-color: #08a9e9;
+    background-color: #f0f3f5;
     flex-direction: column;
     display: flex;
 }
@@ -84,7 +84,7 @@
         position: relative;
         top: 14vh;
         height: 66vh;
-        background-color: #d1d4d2;
+        background-color: #D7D7D7;
         flex-direction: column;
         display: flex;
     }
