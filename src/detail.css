@@ -78,6 +78,7 @@
         left: 50vh;
         bottom: 25vh;
         transform: translate(-50%);
+        z-index: 100;
         cursor: pointer;
     }
     .form-header-inside{
