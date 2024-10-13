@@ -20,28 +20,31 @@
 }
 
 .thankyou-container h1{
+    position: relative;
     font-family: 'CustomFont', sans-serif;
-    font-size: 80px;
+    font-size: 10vh;
+    top:-12vh;
+
 }
 
 
 img .restart-button{
     width:20vh;
     height:20vh;
-    cursor: pointer;
-    height: 100%;
-    width: 100%;
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
+
+@media only screen and (min-device-width: 710px) and (max-device-width: 1024px){
     .thankyou-container{
 
         text-align: center;
         color: rgb(255, 255, 255);
     }
     .restart-button{
-        cursor: pointer;
+        position: relative;
+        top:-10vh;
+       width: auto;
+       height: 20vh;
         
-        margin-top: 10%;
-        cursor: pointer;
+        
     }
 }

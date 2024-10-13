@@ -4,7 +4,7 @@ import LiveCamera from "./LiveCamera";
 import CaptureControls from "./CaptureCamera";
 import html2canvas from "html2canvas";
 import ImagePreview from "./ImagePreview";
-import { toPng } from 'html-to-image';
+import { toPng } from "html-to-image";
 import "./snapstyle.css";
 
 const CameraComponent = ({
@@ -21,6 +21,8 @@ const CameraComponent = ({
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [isCameraReady, setIsCameraReady] = useState(false);
+  const [capturedImageUrl, setCapturedImageUrl] = useState(null); // State for captured image URL
+
 
   const requestMotionPermission = async () => {
     if (
@@ -119,7 +121,6 @@ const CameraComponent = ({
 
   useEffect(() => {
     if (!capturedImage) {
-  
       setupCamera();
     }
   }, [capturedImage, setupCamera]);
@@ -127,26 +128,18 @@ const CameraComponent = ({
   const handleCaptureImage = async () => {
     if (cameraContainerRef.current) {
       try {
-        // Capture the entire container (excluding certain div elements)
         const dataUrl = await toPng(cameraContainerRef.current, {
           cacheBust: true,
           useCors: true,
           filter: (node) => {
-            // Exclude all div elements with class "exclude"
             if (node.tagName === 'DIV' && node.classList.contains('capture-button-container')) {
-              return false; // Exclude this element
+              return false;
             }
-            return true; // Include all other elements
+            return true;
           },
         });
-  
-        // Create a link to download the image
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.download = 'screenshot.png';
-        link.click(); // Automatically trigger download
-  
-        // Pass the captured image URL to a parent component, if needed
+        
+        setCapturedImageUrl(dataUrl); // Store the captured image URL
         onImageCapture(dataUrl);
       } catch (error) {
         console.error('Error capturing image:', error);
@@ -154,7 +147,7 @@ const CameraComponent = ({
       }
     }
   };
-
+  
   const toggleCamera = async () => {
     setCameraFacingMode((prevMode) =>
       prevMode === "environment" ? "user" : "environment"
@@ -197,9 +190,9 @@ const CameraComponent = ({
   };
 
   const saveImageToDevice = async () => {
-    if (capturedImage) {
-      const blob = await fetch(capturedImage).then((res) => res.blob());
-
+    if (capturedImageUrl) {  // Use the captured image URL from state
+      const blob = await fetch(capturedImageUrl).then((res) => res.blob());
+  
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = "captured-image.png";
@@ -208,6 +201,7 @@ const CameraComponent = ({
       alert("No image captured to save.");
     }
   };
+  
 
   const openEmailClient = (emailAddress) => {
     window.location.href = `mailto:${emailAddress}?subject=Check out this image!&body=Here is the image I captured.`;

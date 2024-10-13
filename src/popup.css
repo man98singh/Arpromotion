@@ -11,6 +11,7 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,9 +20,7 @@
 .popup a {
   color: yellow;
 }
-.popup-first {
-  width: 800px;
-}
+
 .popup img {
   margin-top: 10%;
 }
@@ -60,6 +59,7 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
+    width: 103vw;
     display: flex;
     justify-content: center;
     align-items: center;
