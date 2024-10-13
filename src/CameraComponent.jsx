@@ -127,10 +127,17 @@ const CameraComponent = ({
   const handleCaptureImage = async () => {
     if (cameraContainerRef.current) {
       try {
-        // Capture the entire container, including WebGL and CSS styles like clip-path
+        // Capture the entire container (excluding certain div elements)
         const dataUrl = await toPng(cameraContainerRef.current, {
-          cacheBust: true, // Avoids caching issues
-          useCors: true,   // Ensures cross-origin resource sharing is handled
+          cacheBust: true,
+          useCors: true,
+          filter: (node) => {
+            // Exclude all div elements with class "exclude"
+            if (node.tagName === 'DIV' && node.classList.contains('capture-button-container')) {
+              return false; // Exclude this element
+            }
+            return true; // Include all other elements
+          },
         });
   
         // Create a link to download the image
