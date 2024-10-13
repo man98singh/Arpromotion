@@ -28,14 +28,14 @@
   z-index: 1;
 }
 .overlay-image {
-  position: absolute;
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Adjust to perfectly center it */
-  bottom: 4vh; /* Distance from the bottom of the viewport */
-  width: 141px; /* Fixed width for the image */
-  height: auto; /* Maintain aspect ratio */
-  z-index: 5; /* Ensure it stays above the canvas */
-  border: 2px solid yellow; /* Keep the yellow border */
+    position: absolute;
+    left: 72%;
+    transform: translateX(-50%);
+    bottom: 34vh;
+    width: 102px;
+    height: auto;
+    z-index: 5;
+     /* Keep the yellow border */
 }
 
 .canvas-visible {
