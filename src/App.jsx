@@ -9,7 +9,7 @@ const App = () => {
     const [hasAgreed, setHasAgreed] = useState(false);
     const [capturedImage, setCapturedImage] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
-    const [showThankYou, setShowThankYou] = useState(true); 
+    const [showThankYou, setShowThankYou] = useState(false); 
 
     const handleAgreement = () => {
         setHasAgreed(true);
