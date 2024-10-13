@@ -58,7 +58,7 @@
 }
 
 .button-container {
-  margin-top: 40px;
+  /* margin-top: 40px; */
   text-align: center;
 }
 
@@ -117,7 +117,7 @@
     align-items: center;
   }
   .popup-h4-input input {
-    width: 50px;
+    /* width: 50px; */
   }
   .popup-h4-input-2-1 {
     line-height: 3vh;
@@ -142,12 +142,7 @@
   .popup-h4-input-2 input {
     width: 5vw;
   }
-  .popup-h4-input-2 {
-    margin-top: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+ 
   .popup-img-flex {
     margin-top: 10%;
     width: 180%;
@@ -175,16 +170,10 @@
     position: absolute;
     top:0vh;
     width: 25vw;
-    margin-top: 5%;
+    margin-top: 0%;
   }
   .popup-input-text {
-    text-align: start;
-    margin-bottom: 5%;
-    margin-right: 5%;
-    margin-top: 10%;
-
-    display: flex;
-    flex-direction: column;
+    
   }
 
  

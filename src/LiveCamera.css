@@ -25,17 +25,13 @@
   transform: translateX(-50%);
   color: black;
   border: none;
-  padding: 15px 30px;
+  /* padding: 15px 30px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 16px; */
   z-index: 1;
 }
 .overlay-image {
     position: absolute;
-    left: 72%;
-    transform: translateX(-50%);
-    bottom: 34vh;
-    width: 102px;
     height: auto;
     z-index: 5;
      /* Keep the yellow border */
@@ -81,9 +77,9 @@ canvas {
 /* Media Queries */
 
 /* For tablets (768px - 1024px) */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-width: 200px) and (max-width: 1024px) {
   .camera-container {
-    right: 0px;
+    right: 0;
     height: 100vh;
   }
 
@@ -98,9 +94,8 @@ canvas {
     height:10vh;
   }
   .overlay-image {
-    border: 2px solid green;
-    width: 131px;
-    right: 3vh;
-    bottom: 3vh;
+    width: 18vw;
+    right: 13vh;
+    bottom: 33vh;
   }
 }

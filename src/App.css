@@ -59,39 +59,5 @@ body {
 
 
 
-  @media (max-width: 768px) {
-    body {
-      background-size: contain;
-    }
-    #root {
-      padding: 1rem;
-    }
 
-    .logo {
-      height: 4em;
-      padding: 1rem;
-    }
-
-    .button-container {
-      bottom: 15px;
-      gap: 5px;
-    }
-
-    .card {
-      padding: 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .logo {
-      height: 3em;
-    }
-    body {
-      background-size: contain;
-    }
-    .button-container {
-      bottom: 10px;
-      gap: 3px;
-    }
-  }
 }
