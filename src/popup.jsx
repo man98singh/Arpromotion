@@ -27,7 +27,7 @@ const ConsentPopup = ({ onAgree }) => {
         <div className="popup">
           <h2 className="pop-first-title">Διαγωνισμός</h2>
           <h2 className="pop-second-title">για να είσαι μέσα σε όλα!</h2>
-          <h4>Λάβε μέρος!</h4>
+          <h4 className="pop-third-title">Λάβε μέρος!</h4>
           <div className="popup-img-flex">
             <img
               src="/buttons/popupbuttonAsset 7.png"
@@ -50,13 +50,13 @@ const ConsentPopup = ({ onAgree }) => {
                 </h4>
                 </div> */}
             <div className="popup-h4-input-2">
-              <div className="popup-h4-input-2-2">
+              <div className="popup-h4-input-2-1">
                 <input
                   type="checkbox"
                   checked={isChecked}
                   onChange={handleCheckboxChange}
                 />
-                <h4>
+                <h4 className="popup-forth-title">
                   Αποδέχομαι τους <a href="">όρους</a> <br />
                   του διαγωνισμού.
                 </h4>
@@ -67,7 +67,7 @@ const ConsentPopup = ({ onAgree }) => {
                   checked={newsLetter}
                   onChange={handleCheckboxChangeNewsletter}
                 />
-                <h4>
+                <h4 className="popup-fifth-title">
                   Επιθυμώ να λαμβάνω ενημερώσεις
                   <br />
                   σχετικά με προϊόντα και νέες

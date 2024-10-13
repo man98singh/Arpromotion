@@ -95,7 +95,7 @@
   position: relative;
 }
 
-@media only screen and (min-device-width: 711px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width:400px) and (max-device-width: 1024px) {
   .detail-header {
     right: -1vh;
     position: relative;
