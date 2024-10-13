@@ -55,6 +55,7 @@ const ConsentPopup = ({ onAgree }) => {
                   type="checkbox"
                   checked={isChecked}
                   onChange={handleCheckboxChange}
+                  className="i1"
                 />
                 <h4 className="popup-forth-title">
                   Αποδέχομαι τους <a href="">όρους</a> <br />
@@ -66,6 +67,7 @@ const ConsentPopup = ({ onAgree }) => {
                   type="checkbox"
                   checked={newsLetter}
                   onChange={handleCheckboxChangeNewsletter}
+                  className="i2"
                 />
                 <h4 className="popup-fifth-title">
                   Επιθυμώ να λαμβάνω ενημερώσεις

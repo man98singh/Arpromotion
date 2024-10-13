@@ -3,7 +3,23 @@
   src: url("assets/fonts/MyriadPro-Regular_2.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
-}
+}@font-face {
+    font-family: "CustomFontBold";
+    src: url("assets/fonts/PingLCG-Bold.otf") format("opentype");
+    font-weight: bolder;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "CustomFontMedium";
+    src: url("assets/fonts/PingLCG-Medium.otf") format("opentype");
+  }
+  
+  @font-face {
+    font-family: "CustomFontRegular";
+    src: url("assets/fonts/PingLCG-Medium.otf") format("opentype");
+    font-weight: lighter;
+    font-style: normal;
+  }
 
 .popup-first {
   background-image: url("assets/backgrounds/4x/Asset 6@4x.png");
@@ -48,17 +64,26 @@
 
 .pop-first-title{
     position: absolute;
-    top:-15vh;
+    top:-23vh;
+    font-family: 'CustomFontMedium';
 
 }
 .pop-second-title{
     position: absolute;
-    top: -12vh;;
+    font-family: 'CustomFontMedium';
+    top: -19vh;;
 }
 .pop-third-title{
     position:absolute;
-    top:-6vh;
-    font-size: 3vh;
+    top:-15vh;
+    font-size: 6vw;
+    font-family: 'CustomFontRegular';
+}
+.popup-forth-title{
+    font-size: 5vw;
+}
+.popup-fifth-title{
+    font-size: 5vw;
 }
 .button {
   padding: 10px 20px;
@@ -66,8 +91,9 @@
 }
 .popup-h4-input-2-1{
     position: absolute;
-    top:18vh;
-    right:28vh;
+    top:17vh;
+    right:16vh;
+    gap: 4vh;
 }
 @media only screen and (min-width: 200px) and (max-width: 1024px) {
     #root{
@@ -94,24 +120,27 @@
     width: 50px;
   }
   .popup-h4-input-2-1 {
+    line-height: 3vh;
+    top:17vh;
+    right:16vh;
     text-align: start;
-    margin-bottom: 10%;
     display: flex;
-    gap: 5px;
+    gap: 4vh;
     justify-content: space-around;
   }
   .popup-h4-input-2-2 {
+    line-height: 3vh;
     position: absolute;
-    top:28vh;
-    right:18vh;
+    top:27vh;
+    right:2vh;
     text-align: start;
     display: flex;
     justify-content: flex-start;
-    gap: 30px;
+    gap: 4vh;
     margin-bottom: 10%;
   }
   .popup-h4-input-2 input {
-    width: 20px;
+    width: 5vw;
   }
   .popup-h4-input-2 {
     margin-top: 10%;
@@ -125,15 +154,22 @@
     display: flex;
     justify-content: center;
   }
-  .popup {
-   
-    font-size: 18px;
+  .i1{
+    position: relative;
+    top:-1vh;
+    margin: 0;
   }
+  .i2{
+    position: relative;
+    top:-2.1vh;
+    margin: 0;
+  }
+
   .pop-first-title {
-    font-size: 35px;
+    font-size: 4.5vw;
   }
   .pop-second-title {
-    font-size: 34px;
+    font-size: 4.5vw;
   }
   .popup img {
     position: absolute;
@@ -151,10 +187,6 @@
     flex-direction: column;
   }
 
-  .popup input {
-    transform: scale(2);
-  }
-  .button {
-    font-size: 20px;
-  }
+ 
+ 
 }
