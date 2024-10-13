@@ -9,7 +9,7 @@ const App = () => {
     const [hasAgreed, setHasAgreed] = useState(false);
     const [capturedImage, setCapturedImage] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
-    const [showThankYou, setShowThankYou] = useState(false); 
+    const [showThankYou, setShowThankYou] = useState(true); 
 
     const handleAgreement = () => {
         setHasAgreed(true);
@@ -34,7 +34,32 @@ const App = () => {
         console.log("its' triggering badck to camera");
     };
 
-   
+    const shareImage = async (emailAddress) => {
+        if (capturedImage) {
+            const blob = await fetch(capturedImage).then(res => res.blob());
+            const file = new File([blob], 'captured-image.png', { type: 'image/png' });
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Check out this image!',
+                        text: `Here is the image I captured. Send it to: ${emailAddress}`,
+                        files: [file],
+                        url: window.location.href
+                    });
+                    console.log('Image shared successfully');
+                    setShowThankYou(true); 
+                } catch (error) {
+                    console.error('Error sharing the image:', error);
+                    openEmailClient(emailAddress);
+                    setShowThankYou(true); 
+                }
+            } else {
+                openEmailClient(emailAddress); 
+                setShowThankYou(true);  
+            }
+        }
+    };
 
   
     const resetApp = () => {
@@ -62,6 +87,7 @@ const App = () => {
                     ) : (
                         <Details 
                             capturedImage={capturedImage} 
+                            onShare={shareImage} 
                             onReset={resetApp} 
                         />
                     )}
