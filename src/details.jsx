@@ -149,7 +149,7 @@ const Details = ({ capturedImage, onShare, onReset }) => {
           alt="submit"
           onClick={handleShareClick}
           style={{
-            width: "160px",
+            width: "22vw",
           }}
         />
       </div>

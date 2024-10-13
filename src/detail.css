@@ -43,15 +43,15 @@
 .sub-header {
   position: relative;
   font-family: "CustomFontBold";
-  font-size: 15px;
+  /* font-size: 15px; */
 }
 .detail-header {
   line-height: 1.2;
   font-family: "CustomFontBold", sans-serif;
-  padding: 20px;
-  font-size: 20px;
+  /* padding: 20px;
+  font-size: 20px; */
   color: rgb(14, 14, 13);
-  margin-bottom: 0px;
+  /* margin-bottom: 0px; */
 }
 .submit-button {
   position: relative;
@@ -89,7 +89,7 @@
   left: 12vh;
 }
 .form-label-input label {
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 .form-label-input input {
   position: relative;
@@ -102,7 +102,7 @@
     top: 3vh;
     font-family: "CustomFontBold", sans-serif;
     padding: 0;
-    font-size: 37px;
+    font-size: 5vw;
     color: rgb(14, 14, 13);
   }
 
@@ -138,13 +138,13 @@
     top: 0vh;
   }
   .form-label-input label {
-    font-size: 35px;
+    /* font-size: 35px; */
   }
   .form-label-input input {
     color: black;
     background-color: white;
     border: none;
-    width: 28vh;
+    width: 50vw;
     height: 2vh;
   }
   .sub-header {
@@ -153,12 +153,13 @@
     right: 0vh;
     font-family: "CustomFontMedium";
     font-weight: 700;
-    font-size: 21px;
+     font-size: 3vw;
   }
   .name-label {
     position: absolute;
-    top: -1vh;
-    right: 18.5vh;
+    top: 0.5vh;
+    right: 28.5vh;
+    font-size: 3vw;
   }
   .name-input {
     position: relative;
@@ -167,6 +168,7 @@
   .number-label {
     position: relative;
     top: 0.5vh;
+    font-size: 3vw;
   }
 
   .number-input {
@@ -176,6 +178,7 @@
   .email-label {
     position: relative;
     top: -0.3vh;
+    font-size: 3vw;
   }
   .email-input {
     position: relative;
