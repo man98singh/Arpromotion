@@ -46,7 +46,7 @@ const CameraComponent = ({
   const setupCamera = useCallback(async () => {
     console.log("setting up camera");
     setError(null);
-
+  
     const permissionState = await requestMotionPermission();
     if (permissionState !== "granted") {
       setError(
@@ -54,47 +54,45 @@ const CameraComponent = ({
       );
       return;
     }
-
+  
     try {
       const cameraKit = await bootstrapCameraKit({
         apiToken:
           "eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzI4NzE5MjU0LCJzdWIiOiI5M2RiN2U3ZS1hMGRmLTRhODctYjM4NC0xMWE5Yzk5MDVjZDB-U1RBR0lOR35iNDRiZjVmMS0wMzhmLTQ5YTctOWQ1OS1iNmE0ZDJmYTkyZmQifQ.WbSMYa3UMUC79e_Tq8Y-I4FeuMc1DvQMz8Im66cJNg0",
       });
-
+  
       const session = await cameraKit.createSession({
         liveRenderTarget: canvasRef.current,
       });
       sessionRef.current = session;
-
+  
       const videoConstraints = {
         width: { ideal: 1280, min: 640, max: 1920 },
         height: { ideal: 720, min: 480, max: 1080 },
         facingMode: cameraFacingMode,
       };
-
+  
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: videoConstraints,
       });
       mediaStreamRef.current = mediaStream;
-
+  
       await session.setSource(mediaStream);
       await session.play();
-
+  
       setIsCameraReady(true);
       console.log("camera setup completed");
-
-      setTimeout(async () => {
-        try {
-          const lens = await cameraKit.lensRepository.loadLens(
-            "8da5d561-1b8d-4391-8ea2-32906c0c718f",
-            "f029c812-af38-419f-a7dc-5c953e78ea98"
-          );
-          await session.applyLens(lens);
-          console.log("lens applied successfully");
-        } catch (error) {
-          console.error("Failed to apply lens:", error);
-        }
-      }, 200);
+  
+      try {
+        const lens = await cameraKit.lensRepository.loadLens(
+          "8da5d561-1b8d-4391-8ea2-32906c0c718f",
+          "f029c812-af38-419f-a7dc-5c953e78ea98"
+        );
+        await session.applyLens(lens);
+        console.log("lens applied successfully");
+      } catch (error) {
+        console.error("Failed to apply lens:", error);
+      }
     } catch (error) {
       console.error("Failed to initialize camera:", error);
       setError(
@@ -102,6 +100,7 @@ const CameraComponent = ({
       );
     }
   }, [cameraFacingMode]);
+  
 
   useEffect(() => {
     setupCamera();
