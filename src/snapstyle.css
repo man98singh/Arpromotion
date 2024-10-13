@@ -24,10 +24,7 @@ body {
 }
 
 @media (max-width: 600px) {
-  .capture-button {
-  
-    
-  }
+
 
   .back-button {
     font-size: 14px;
@@ -36,11 +33,11 @@ body {
 
 .button-container {
     position: absolute;
-    bottom: 25vh;
+    bottom: 21vh;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 111px;
+    gap: 14vh;
     z-index: 5;
     align-items: baseline;
 }

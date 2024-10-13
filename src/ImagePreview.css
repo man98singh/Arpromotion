@@ -5,6 +5,18 @@
 
   /* Add subtle border-radius for a smoother look */
 }
+.mukul {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+  }
 
 .image-container {
   justify-content: center;
@@ -28,8 +40,8 @@
 }
 
 .button-container img {
-  width: 60px;
-  height: 60px;
+  width: auto;
+  height: 10vh;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -40,10 +52,7 @@
 
 .back-button,
 .share-button,
-.continue-button {
-  width: 70px;
-  height: 70px;
-}
+
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .poweredby-image {

@@ -6,7 +6,7 @@ const CaptureControls = ({ onCapture }) => {
       <img
         src="/buttons/fcameraAsset 12@2x.png"
         alt="Capture"
-        className="capture-button"
+        className="capture-button" 
         onClick={onCapture}
         
       />

@@ -11,12 +11,16 @@
   height: 100vh;
   overflow: hidden;
 }
+.capture-button{
+    height: 10vh;
+    width: auto;
+}
 .capture-button-container {
     
   position: absolute;
   height:20vh;
   width:20vh;
-  bottom: 20vh;
+  bottom: 15vh;
   left: 50%;
   transform: translateX(-50%);
   color: black;
@@ -90,7 +94,9 @@ canvas {
     width: 100vw;
     height: 70vh;
   }
-
+  .capture-button{
+    height:10vh;
+  }
   .overlay-image {
     border: 2px solid green;
     width: 131px;
