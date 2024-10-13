@@ -36,14 +36,14 @@ body {
 }
 
 .button-container {
-  position: absolute;
-  bottom: 51px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 111px;
-  z-index: 5;
-  align-items: baseline;
+    position: absolute;
+    bottom: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 111px;
+    z-index: 5;
+    align-items: baseline;
 }
 
 @media (max-width: 600px) {
