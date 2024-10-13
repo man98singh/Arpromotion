@@ -1,0 +1,46 @@
+const handleCaptureImage = async () => {
+    if (cameraContainerRef.current && canvasRef.current) {
+      try {
+        // Step 1: Capture the entire container (HTML elements, including the canvas styling) using html2canvas
+        const containerCanvas = await html2canvas(cameraContainerRef.current, {
+          useCORS: true,
+          allowTaint: true,
+          logging: true,
+          scale: 1, // Maintain the same scale as displayed
+          backgroundColor: null, // Keep transparency if needed
+        });
+  
+        // Step 2: Capture the actual WebGL canvas (camera feed) using toDataURL
+        const cameraCanvas = canvasRef.current;
+        const cameraImageData = cameraCanvas.toDataURL("image/png");
+  
+        // Step 3: Create an image element from the captured WebGL canvas data
+        const cameraImage = new Image();
+        cameraImage.src = cameraImageData;
+  
+        cameraImage.onload = () => {
+          // Step 4: Create a new canvas to combine both the HTML capture and the WebGL canvas
+          const combinedCanvas = document.createElement("canvas");
+          combinedCanvas.width = containerCanvas.width;
+          combinedCanvas.height = containerCanvas.height;
+          const ctx = combinedCanvas.getContext("2d");
+  
+          // Step 5: Draw the captured HTML content (with CSS applied, like clip-path)
+          ctx.drawImage(containerCanvas, 0, 0);
+  
+          // Step 6: Overlay the WebGL canvas content (Snap Lens) on top
+          ctx.drawImage(cameraImage, 0, 0);
+  
+          // Step 7: Convert the combined canvas to a data URL
+          const combinedImageUrl = combinedCanvas.toDataURL("image/png");
+  
+          // Step 8: Pass the combined image URL to the parent component or handle as needed
+          onImageCapture(combinedImageUrl);
+        };
+      } catch (error) {
+        console.error("Error capturing image:", error);
+        setError("Failed to capture image. Please try again.");
+      }
+    }
+  };
+  
