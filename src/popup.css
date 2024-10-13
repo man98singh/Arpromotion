@@ -86,8 +86,8 @@
     font-size: 5vw;
 }
 .button {
-  padding: 10px 20px;
-  font-size: 16px;
+  /* padding: 10px 20px;
+  font-size: 16px; */
 }
 .popup-h4-input-2-1{
     position: absolute;
@@ -161,10 +161,10 @@
   }
 
   .pop-first-title {
-    font-size: 4.5vw;
+    font-size: 4vw;
   }
   .pop-second-title {
-    font-size: 4.5vw;
+    font-size: 4vw;
   }
   .popup img {
     position: absolute;
